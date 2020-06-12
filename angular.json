@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MeanStack"
+    }
+  },
+  "defaultProject": "MeanStack",
+  "cli": {
+    "analytics": false
+  }
 }
