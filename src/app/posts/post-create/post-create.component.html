@@ -3,6 +3,12 @@
     <mat-label>Post message</mat-label>
     <textarea matInput></textarea>
   </mat-form-field>
-  <p><button mat-raised-button color="primary">Save Post</button></p>
-  <mat-label>User label</mat-label>
+
+  <p>
+    <button mat-raised-button color="primary" (click)="onAddPost()">
+      Save Post
+    </button>
+  </p>
+
+  <mat-label>{{ newPost }}</mat-label>
 </div>
