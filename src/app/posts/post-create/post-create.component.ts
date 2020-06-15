@@ -16,6 +16,9 @@ export class PostCreateComponent implements OnInit {
   onAddPost(postTextarea: HTMLTextAreaElement) {
     this.newPost = postTextarea.value;
     // this.newPost = 'The user\'s post';
+
+    /* debug using 'consols.dir' - Shows all DOM element meta data*/
+    console.dir(postTextarea);
   }
 
 }
