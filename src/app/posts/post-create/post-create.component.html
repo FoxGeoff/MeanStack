@@ -1,11 +1,11 @@
 <div class="container">
   <mat-form-field appearance="fill">
     <mat-label>Post message</mat-label>
-    <textarea matInput [value]="newPost"></textarea>
+    <textarea #postTextarea matInput [value]="newPost"></textarea>
   </mat-form-field>
 
   <p>
-    <button mat-raised-button color="primary" (click)="onAddPost()">
+    <button mat-raised-button color="primary" (click)="onAddPost(postTextarea)">
       Save Post
     </button>
   </p>
