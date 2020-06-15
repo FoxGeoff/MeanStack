@@ -8,3 +8,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 * Run: ```ng add @angular/material```
 * Task: Add: Material Module
+* Export all the mat components
+* Import material.module ine app.module
+* Restart VSCode to see the results
