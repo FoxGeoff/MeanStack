@@ -1,7 +1,7 @@
 <div class="container">
   <mat-form-field appearance="fill">
     <mat-label>Post message</mat-label>
-    <textarea #postTextarea matInput [value]="newPost"></textarea>
+    <textarea #postTextarea matInput  [(ngModel)] = "enteredValue"></textarea>  <!--  [value]="newPost" -->
   </mat-form-field>
 
   <p>

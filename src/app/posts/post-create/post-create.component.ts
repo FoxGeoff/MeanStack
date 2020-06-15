@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostCreateComponent implements OnInit {
   newPost = 'NO CONTENT';
+  enteredValue = '';
 
   constructor() { }
 
@@ -14,11 +15,13 @@ export class PostCreateComponent implements OnInit {
   }
 
   onAddPost(postTextarea: HTMLTextAreaElement) {
-    this.newPost = postTextarea.value;
+    this.newPost = this.enteredValue;
+
+    // this.newPost = postTextarea.value;
     // this.newPost = 'The user\'s post';
 
     /* debug using 'consols.dir' - Shows all DOM element meta data*/
-    console.dir(postTextarea);
+    // console.dir(postTextarea);
   }
 
 }
