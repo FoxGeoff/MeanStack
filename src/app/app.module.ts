@@ -7,11 +7,13 @@ import { MaterialModule } from './material/material.module';
 
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
