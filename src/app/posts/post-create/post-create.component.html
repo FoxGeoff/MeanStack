@@ -3,7 +3,7 @@
 <div class="container">
   <mat-card>
     <mat-form-field appearance="fill">
-      <mat-label>Post message</mat-label>
+      <mat-label>Post message here...</mat-label>
       <textarea #postTextarea matInput [(ngModel)]="enteredValue"></textarea>
       <!--  [value]="newPost" -->
     </mat-form-field>
@@ -19,4 +19,7 @@
     </p>
   </mat-card>
   <mat-label>{{ newPost }}</mat-label>
+  <p>
+    <app-post-list></app-post-list>
+  </p>
 </div>
