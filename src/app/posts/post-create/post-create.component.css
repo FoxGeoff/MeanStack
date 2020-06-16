@@ -2,3 +2,7 @@
  {
    margin: 20px;
  }
+
+ mat-card {
+   width: 300px;
+ }
