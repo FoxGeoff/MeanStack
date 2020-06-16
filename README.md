@@ -61,3 +61,5 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
    margin-top: 1rem;
  }
 ```
+
+## Task: Add: Test posts
