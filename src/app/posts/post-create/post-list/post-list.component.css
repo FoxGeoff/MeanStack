@@ -1,3 +1,5 @@
-mat-expansion-panel {
-  width: 332px;
+ 
+ :host {
+   display: block;
+   margin-top: 1rem;
  }

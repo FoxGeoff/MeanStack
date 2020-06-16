@@ -39,5 +39,25 @@ newPost=''; //property
 
 onAddPost(postTextarea: HTMLTextAreaElement) {
     this.newPost = this.enteredValue;
-}
+```
+
+## Task: Add mat toolbar
+
+## Task: Add: mat expansion panel
+
+* styling mat card in post-create component and mat expansion in post-list component
+
+```css post-create
+.container
+ {
+   margin: 20px;
+   width: 300px;
+ }
+```
+
+```css post-list
+ :host {
+   display: block;
+   margin-top: 1rem;
+ }
 ```
