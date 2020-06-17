@@ -1,5 +1,9 @@
- 
+
  :host {
    display: block;
    margin-top: 1rem;
  }
+
+ .noPosts { 
+   text-align: center;
+}
