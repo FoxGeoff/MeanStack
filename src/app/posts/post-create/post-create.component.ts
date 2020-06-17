@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Post } from './post-list/post';
 
 @Component({
@@ -7,6 +7,8 @@ import { Post } from './post-list/post';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
+  @Output() newPost: Post;
+
   noPosts = 'No posts to display';
   enteredTitle = '';
   enteredMessage = '';
@@ -15,12 +17,18 @@ export class PostCreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.posts = [];
+
   }
 
   onAddPost() {
-    // TODO: create a new post
     // TODO: add the new post to posts[] in post-list component
+
+    this.newPost = {
+      message: this.enteredMessage,
+      title: this.enteredTitle
+    };
+
+    console.log(`Title: ${this.newPost.title} Message: ${this.newPost.message}`);
   }
 
 }
