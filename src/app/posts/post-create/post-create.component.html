@@ -2,23 +2,22 @@
 
 <div class="container">
   <mat-card>
+    <mat-form-field>
+      <mat-label>Post title</mat-label>
+      <input matInput type="text" [(ngModel)]="enteredTitle" />
+    </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Post message here...</mat-label>
-      <textarea #postTextarea matInput [(ngModel)]="enteredValue"></textarea>
-      <!--  [value]="newPost" -->
+      <textarea #postTextarea matInput [(ngModel)]="enteredMessage"></textarea>
     </mat-form-field>
 
     <p>
-      <button
-        mat-raised-button
-        color="accent"
-        (click)="onAddPost(postTextarea)"
-      >
+      <button mat-raised-button color="accent" (click)="onAddPost()">
         Save Post
       </button>
     </p>
   </mat-card>
-  <mat-label>{{ newPost }}</mat-label>
+
   <p>
     <app-post-list></app-post-list>
   </p>

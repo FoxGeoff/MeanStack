@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from './post-list/post';
 
 @Component({
   selector: 'app-post-create',
@@ -6,22 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  newPost = 'NO CONTENT';
-  enteredValue = '';
+  noPosts = 'No posts to display';
+  enteredTitle = '';
+  enteredMessage = '';
+  posts: Post[];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.posts = [];
   }
 
-  onAddPost(postTextarea: HTMLTextAreaElement) {
-    this.newPost = this.enteredValue;
-
-    // this.newPost = postTextarea.value;
-    // this.newPost = 'The user\'s post';
-
-    /* debug using 'consols.dir' - Shows all DOM element meta data*/
-    // console.dir(postTextarea);
+  onAddPost() {
+    // TODO: create a new post
+    // TODO: add the new post to posts[] in post-list component
   }
 
 }

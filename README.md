@@ -63,3 +63,5 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
 ```
 
 ## Task: Add: Test posts
+
+## Task: Add: User input Title and Message
