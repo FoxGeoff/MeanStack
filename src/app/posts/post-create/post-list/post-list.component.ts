@@ -8,7 +8,7 @@ import { PostsService } from 'src/app/service/posts.service';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
-  @Input() posts: Post[] = [
+  posts: Post[] = [
 /*
     { title: 'First Post', message: 'this is the first post' },
     { title: 'Second Post', message: 'this is the second post' },
@@ -22,8 +22,7 @@ export class PostListComponent implements OnInit {
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
+    this.posts = this.postsService.getPosts();
   }
-
-   
 
 }

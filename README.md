@@ -184,3 +184,22 @@ export class AppComponent {
   providedIn: 'root'
 })
 ```
+
+## Task: Calling GET Post (observables)
+
+* Replacing "emit" with rxjs "Subject"
+
+```JavaScript
+private postsUpdate$ = new Subject<Post[]>();
+...
+export class PostsService {
+  private posts: Post[] = [];
+  private postsUpdate$ = new Subject();
+...
+addPost(postTitle: string, msg: string) {
+    const post: Post = {title: postTitle, message: msg};
+    this.posts.push(post);
+    this.postsUpdate$.next([...this.posts]);
+  }  
+```
+
