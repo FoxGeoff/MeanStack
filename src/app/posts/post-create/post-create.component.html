@@ -4,23 +4,29 @@
   <form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">
     <mat-form-field class="full-width">
       <mat-label>Post title</mat-label>
-      <input matInput type="text" name="title" ngModel/>
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        required
+        #titleVar="ngModel"
+      />
+      <mat-error *ngIf="titleVar.invalid">Title required</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Post message here...</mat-label>
-      <textarea matInput rows="4" name="message" ngModel></textarea>
+      <textarea matInput rows="4" name="message" required ngModel #msgVar="ngModel"> </textarea>
+      <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
     </mat-form-field>
 
+    <!-- removed: [disabled]="!postForm.form.valid" -->
     <p>
-      <button
-        mat-raised-button
-        color="accent"
-        type="submit"
-        [disabled]="!postForm.form.valid"
-      >
+      <button mat-raised-button color="accent" type="submit">
         Save Post
       </button>
     </p>
   </form>
 </mat-card>
+
