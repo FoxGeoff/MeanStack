@@ -175,3 +175,12 @@ export class AppComponent {
   </mat-form-field> ```
 
 ## Task: Add: PostService
+
+* Register service in app.module ``providers:[postservice]
+* OR register using (both will create a Singleton at the root level)
+
+```JavaScript
+@Injectable({
+  providedIn: 'root'
+})
+```
