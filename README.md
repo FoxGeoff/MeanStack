@@ -185,7 +185,7 @@ export class AppComponent {
 })
 ```
 
-## Task: Calling GET Post (observables)
+## Task: Calling GET Post (observables) Subject emit
 
 * Replacing "emit" with rxjs "Subject"
 
@@ -196,6 +196,10 @@ export class PostsService {
   private posts: Post[] = [];
   private postsUpdate$ = new Subject();
 ...
+getPostUpdate$() {
+    return this.postsUpdate$.asObservable();
+  }
+...
 addPost(postTitle: string, msg: string) {
     const post: Post = {title: postTitle, message: msg};
     this.posts.push(post);
@@ -203,3 +207,9 @@ addPost(postTitle: string, msg: string) {
   }  
 ```
 
+* Task: alling GET Post (observables) Subscribe
+
+```JavaScript
+
+
+```
