@@ -10,7 +10,7 @@ export class PostCreateComponent implements OnInit {
   noPosts = 'No posts to display';
   enteredTitle = '';
   enteredMessage = '';
-  @Output() postCreated = new EventEmitter();
+  @Output() postCreated = new EventEmitter<Post>();
 
   constructor() { }
 
@@ -27,6 +27,9 @@ export class PostCreateComponent implements OnInit {
     console.log(`Title: ${newPost.title} Message: ${newPost.message}`);
 
     this.postCreated.emit(newPost);
+
+    this.enteredTitle = '';
+    this.enteredMessage = '';
   }
 
 }
