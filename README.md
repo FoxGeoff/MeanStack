@@ -207,9 +207,21 @@ addPost(postTitle: string, msg: string) {
   }  
 ```
 
-* Task: alling GET Post (observables) Subscribe
+* Task: Calling GET Post (observables) Subscribe & ngOnDestroy
 
 ```JavaScript
+export class PostListComponent implements OnInit, OnDestroy{
+...
+constructor(private postsService: PostsService) { }
 
+  ngOnInit(): void {
+    this.postSubscription = this.postsService.getPostUpdate$()
+      .subscribe(
+        (posts: Post[]) => { this.posts = posts; });
+  }
+
+  ngOnDestroy(): void {
+    this.postSubscription.unsubscribe();
+  }  
 
 ```
