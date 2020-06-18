@@ -173,3 +173,5 @@ export class AppComponent {
       <textarea matInput rows="4" name="message" required ngModel #msgVar="ngModel"> </textarea>
       <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
   </mat-form-field> ```
+
+## Task: Add: PostService
