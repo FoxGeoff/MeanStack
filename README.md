@@ -119,6 +119,46 @@ export class AppComponent {
 }
 ```
 
-## Task: Adding forms
+## Task: Adding forms (no validation yet!)
 
-* Use ```<form>```, ngModel and (submit)
+* Use: ```<form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">```
+* Use: ```<input matInput type="text" name="title" ngModel/>```
+* Use: ```<button type="submit" [disabled]="!postForm.form.valid">Save</button>```
+
+```html
+<form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">
+    <mat-form-field class="full-width">
+      <mat-label>Post title</mat-label>
+      <input matInput type="text" name="title" ngModel/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Post message here...</mat-label>
+      <textarea matInput rows="4" name="message" ngModel></textarea>
+    </mat-form-field>
+
+    <p>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!postForm.form.valid"
+      >
+        Save Post
+      </button>
+    </p>
+  </form>
+  ```
+
+  ```JavaScript
+  onAddPost(form: NgForm) {
+    const post = {
+      title: form.value.title,
+      message: form.value.message
+    };
+
+    console.log(`Title: ${post.title} Message: ${post.message}`);
+
+    this.postCreated.emit(post);
+  }
+  ```
