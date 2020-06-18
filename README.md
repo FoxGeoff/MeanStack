@@ -118,3 +118,7 @@ export class AppComponent {
   }
 }
 ```
+
+## Task: Adding forms
+
+* Use ```<form>```, ngModel and (submit)
