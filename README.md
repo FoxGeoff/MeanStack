@@ -165,12 +165,11 @@ export class AppComponent {
 
   ##Task: Add: Form validation error messages
 
-  * **(note: ngModel AND #msgVar="ngModle" used)**
+* (note: ngModel AND #msgVar="ngModle" used)
 
   ```html
   <mat-form-field class="full-width" appearance="fill">
       <mat-label>Post message here...</mat-label>
       <textarea matInput rows="4" name="message" required ngModel #msgVar="ngModel"> </textarea>
       <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
-  </mat-form-field>
-```
+  </mat-form-field> ```
