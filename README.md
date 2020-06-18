@@ -69,12 +69,13 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
 ## Task: Creating Posts with Property & Event Binding
 
 * Task: Add: the new post to posts[] @Output()
+* Step #1: On raised event, @Output() postCreated to parent (app.component)
 
 ```JavaScript
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 ...
 export class PostCreateComponent implements OnInit {
-   @Output() postCreated = new EventEmitter(); //***
+   @Output() postCreated = new EventEmitter<Post>(); //***
 ...
 onAddPost() {
     const newPost = {
@@ -99,6 +100,8 @@ onAddPost() {
   </div>
 </main>
 ```
+
+* Step #2: take storedPosts from the (parent: app.component) and @Intput() posts (child: component post-list)
 
 ```JavaScript
 export class PostListComponent implements OnInit {
