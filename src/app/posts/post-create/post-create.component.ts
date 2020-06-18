@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Post } from './post-list/post';
 
 @Component({
@@ -7,12 +7,10 @@ import { Post } from './post-list/post';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  @Output() newPost: Post;
-
   noPosts = 'No posts to display';
   enteredTitle = '';
   enteredMessage = '';
-  posts: Post[];
+  @Output() postCreated = new EventEmitter();
 
   constructor() { }
 
@@ -21,14 +19,14 @@ export class PostCreateComponent implements OnInit {
   }
 
   onAddPost() {
-    // TODO: add the new post to posts[] in post-list component
-
-    this.newPost = {
+    const newPost = {
       message: this.enteredMessage,
       title: this.enteredTitle
     };
 
-    console.log(`Title: ${this.newPost.title} Message: ${this.newPost.message}`);
+    console.log(`Title: ${newPost.title} Message: ${newPost.message}`);
+
+    this.postCreated.emit(newPost);
   }
 
 }

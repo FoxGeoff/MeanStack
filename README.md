@@ -65,3 +65,53 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
 ## Task: Add: Test posts
 
 ## Task: Add: User input Title and Message
+
+## Task: Creating Posts with Property & Event Binding
+
+* Task: Add: the new post to posts[] @Output()
+
+```JavaScript
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+...
+export class PostCreateComponent implements OnInit {
+   @Output() postCreated = new EventEmitter(); //***
+...
+onAddPost() {
+    const newPost = {
+      message: this.enteredMessage,
+      title: this.enteredTitle
+    };
+
+    console.log(`Title: ${newPost.title} Message: ${newPost.message}`);
+
+    this.postCreated.emit(newPost); //***
+  }
+```
+
+```html
+<main class="main">
+  <div class="create">
+    <app-post-create (postCreated)="onPostAdded($event)"></app-post-create>
+  </div>
+
+  <div class="list">
+    <app-post-list [posts] = "storedPosts"></app-post-list>
+  </div>
+</main>
+```
+
+```JavaScript
+export class PostListComponent implements OnInit {
+  @Input() posts: Post[] = [];
+```
+
+```JavaScript
+export class AppComponent {
+  title = 'MeanStack';
+  storedPosts: Post[] = [];
+
+  onPostAdded(post: Post) {
+    this.storedPosts.push(post);
+  }
+}
+```

@@ -1,1 +1,9 @@
-<app-post-create></app-post-create>
+<main class="main">
+  <div class="create">
+    <app-post-create (postCreated)="onPostAdded($event)"></app-post-create>
+  </div>
+
+  <div class="list">
+    <app-post-list [posts] = "storedPosts"></app-post-list>
+  </div>
+</main>
