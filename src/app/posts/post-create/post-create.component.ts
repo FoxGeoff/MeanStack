@@ -20,7 +20,7 @@ export class PostCreateComponent implements OnInit {
       return;
     }
 
-    console.log(`Title: ${form.value.title} Message: ${form.value.messagee}`);
+    console.log(`Title: ${form.value.title} Message: ${form.value.message}`);
 
     /* Replaced this.postCreated.emit(post); by the postService */
 
