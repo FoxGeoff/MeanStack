@@ -4,6 +4,10 @@
    margin-top: 1rem;
  }
 
+ mat-accordion {
+  width: 100%
+ }
+
  .noPosts {
    text-align: center;
 }

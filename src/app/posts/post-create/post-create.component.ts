@@ -25,6 +25,7 @@ export class PostCreateComponent implements OnInit {
     /* Replaced this.postCreated.emit(post); by the postService */
 
     this.postService.addPost(form.value.title, form.value.message);
+    form.resetForm();
   }
 
 
