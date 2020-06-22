@@ -1,3 +1,4 @@
+// node server.js (not in package.json)
 const http = require('http');
 
 const server =http.createServer((req, res) => {
