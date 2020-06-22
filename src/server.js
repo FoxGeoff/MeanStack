@@ -1,4 +1,7 @@
 // node server.js (not in package.json)
+// npm install nodemon --save-dev
+// npm run start:server ("start:server":nodemon server.js) ISSUE!
+// FIX: nodemon server.js (in dir src)
 const http = require("http");
 const app = require("../backend/app");
 
