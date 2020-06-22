@@ -1,4 +1,5 @@
 // npm install express --save
+// this is the express framework app
 const express = require('express');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use("/api/posts", (req, res, next) => {
       message: "This is also coming from the server"
    }
   ];
+  // just by being the last in the chain it is returned.
   return res.status(200).json({
     msg: 'Posts feched succesfully!',
     posts: posts

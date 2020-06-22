@@ -1,7 +1,7 @@
 // node server.js (not in package.json)
 // npm install nodemon --save-dev
 // npm run start:server ("start:server":nodemon server.js) ISSUE!
-// FIX: nodemon server.js (in dir src) 
+// FIX: nodemon server.js (in dir src)
 const http = require("http");
 const app = require("../backend/app");
 
@@ -42,7 +42,7 @@ const onError = (error) => {
 const onListening = () => {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
-  console.debug("listening on " + bind);
+  console.debug("Server listening on " + bind);
 };
 
 const port = normalizePort(process.env.PORT || "3000");
