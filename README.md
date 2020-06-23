@@ -422,3 +422,9 @@ app.post("/api/posts", (req, res, next) => {
 ## Task: Setting up MongoDB
 
 ## Task: Setting up Mongoose
+
+* Run: ```npm install mongoose --save```
+
+## Task: Understanding Mongoose Schemas & Models
+
+## Task: Creating a POST Instance
