@@ -418,3 +418,7 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 ```
+
+## Task: Setting up MongoDB
+
+## Task: Setting up Mongoose
