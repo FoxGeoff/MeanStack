@@ -20,11 +20,11 @@ export class PostsService {
     */
 
     // on destroy not required here. Built into api.
-    this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts')
-    .subscribe((postData) => {
-      this.posts = postData.posts;
-      this.postsUpdate$.next([...this.posts]);
-    });
+    this.http.get<{ message: string, posts: Post[] }>('http://localhost:3000/api/posts')
+      .subscribe((postData) => {
+        this.posts = postData.posts;
+        this.postsUpdate$.next([...this.posts]);
+      });
 
   }
 
@@ -33,8 +33,12 @@ export class PostsService {
   }
 
   addPost(postTitle: string, msg: string) {
-    const post: Post = {id: null, title: postTitle, message: msg};
-    this.posts.push(post);
-    this.postsUpdate$.next([...this.posts]);
+    const post: Post = { id: null, title: postTitle, message: msg };
+    this.http.post<{ msg: string }>('http://localhost:3000/api/posts', post)
+      .subscribe((responData) => {
+        console.log(responData.msg);
+        this.posts.push(post);
+        this.postsUpdate$.next([...this.posts]);
+      });
   }
 }
