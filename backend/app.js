@@ -2,6 +2,8 @@
 // this is the express framework app
 const express = require("express");
 const bodyParser = require("body-parser");
+const Post = required('.models/post');
+
 
 const app = express();
 
@@ -22,7 +24,10 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next) => {
-  const post = req.body;
+  const post = new Post({
+    title: req.body.title,
+    message: req.body.message
+  });
   console.log(post);
   res.status(201).json({
     msg: "Post added sucessfully"
@@ -32,7 +37,7 @@ app.post("/api/posts", (req, res, next) => {
 app.use("/api/posts", (req, res, next) => {
   const posts = [
     {
-      id: "12345",
+      id: "1aSz345",
       title: "First server-side post",
       message: "This is coming from the server",
     },
