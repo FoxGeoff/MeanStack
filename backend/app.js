@@ -2,18 +2,20 @@
 // this is the express framework app
 const express = require("express");
 const bodyParser = require("body-parser");
-const Post = required(".models/post");
-const mongoose = required("mongoose");
-
+const Post = require("./models/post");
+const mongoose = require("mongoose");
 
 const app = express();
-mongoose.connect("mongodb+srv://Geoff:CeY6ZOgSDrqXvJUC@cluster0-vjt73.mongodb.net/angular-mean?retryWrites=true&w=majority")
-.then(() => {
-  console.log('Connected to database!');
-})
+mongoose
+  .connect(
+    "mongodb+srv://Geoff:CeY6ZOgSDrqXvJUC@cluster0-vjt73.mongodb.net/angular-mean?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    console.log("Connected to database!");
+  })
   .catch(() => {
-    console.log('Connection failed!');
-});
+    console.log("Connection failed!");
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,11 +36,11 @@ app.use((req, res, next) => {
 app.post("/api/posts", (req, res, next) => {
   const post = new Post({
     title: req.body.title,
-    message: req.body.message
+    message: req.body.message,
   });
   console.log(post);
   res.status(201).json({
-    msg: "Post added sucessfully"
+    msg: "Post added sucessfully",
   });
 });
 

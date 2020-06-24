@@ -1,4 +1,4 @@
-const mongoose = required("mongoose");
+const mongoose = require("mongoose");
 
 //note "String is a class used in node/mongoDB"
 const postSchema = mongoose.Schema({
@@ -6,4 +6,4 @@ const postSchema = mongoose.Schema({
   message: { type: String, required: true },
 });
 // this will automaticly by stored in collection "posts"
-module.exports = momgoose.model('Post', postSchema);
+module.exports = mongoose.model('Post', postSchema);
