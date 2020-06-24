@@ -46,23 +46,14 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
-app.use("/api/posts", (req, res, next) => {
-  const posts = [
-    {
-      id: "1aSz345",
-      title: "First server-side post",
-      message: "This is coming from the server",
-    },
-    {
-      id: "12355",
-      title: "Second server-side post",
-      message: "This is also coming from the server",
-    },
-  ];
-  // just by being the last in the chain it is returned.
-  return res.status(200).json({
-    msg: "Posts feched succesfully!",
-    posts: posts,
+app.get("/api/posts", (req, res, next) => {
+  //mongoose
+  Post.find().then(documents => {
+    console.log(documents);
+  });
+  res.status(200).json({
+    msg: "Posts feched successfully!",
+    posts: documents
   });
 });
 
