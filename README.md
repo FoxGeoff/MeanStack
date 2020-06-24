@@ -434,3 +434,5 @@ app.post("/api/posts", (req, res, next) => {
 ## Task: Connecting our Node Express App to MongoDB
 
 ## task Storing Data in a Database
+
+* Storing Data in a Database (DB Query)
