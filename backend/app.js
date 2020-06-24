@@ -2,10 +2,18 @@
 // this is the express framework app
 const express = require("express");
 const bodyParser = require("body-parser");
-const Post = required('.models/post');
+const Post = required(".models/post");
+const mongoose = required("mongoose");
 
 
 const app = express();
+mongoose.connect("mongodb+srv://Geoff:CeY6ZOgSDrqXvJUC@cluster0-vjt73.mongodb.net/angular-mean?retryWrites=true&w=majority")
+.then(() => {
+  console.log('Connected to database!');
+})
+  .catch(() => {
+    console.log('Connection failed!');
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
