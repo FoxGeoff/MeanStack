@@ -427,4 +427,8 @@ app.post("/api/posts", (req, res, next) => {
 
 ## Task: Understanding Mongoose Schemas & Models
 
+* Add: backend model "post.js"
+
 ## Task: Creating a POST Instance
+
+## Task: Connecting our Node Express App to MongoDB
