@@ -35,7 +35,6 @@ export class PostsService {
         this.posts = transformedPosts;
         this.postsUpdate$.next([...this.posts]);
       });
-
   }
 
   getPostUpdate$() {

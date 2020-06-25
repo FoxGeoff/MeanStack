@@ -509,6 +509,29 @@ app.get("/api/posts", (req, res, next) => {
 module.exports = app;
 ```
 
- 
-
 ## Task: Transforming Response Data  ( _id =>  id )
+
+```JavaScript
+  getPosts() {
+    /* using a array copy, this is GOOD
+    *  but creates an issue
+    *  Fix be using an event driven approach with rxjs
+    */
+
+    // on destroy not required here bcause it is built into the api.
+    this.http
+      .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts')
+      .pipe(map((postData) => {
+        return postData.posts.map(post => {
+          return {
+            title: post.title,
+            message: post.message,
+            id: post._id
+          };
+        });
+      }))
+      .subscribe((transformedPosts) => {
+        this.posts = transformedPosts;
+        this.postsUpdate$.next([...this.posts]);
+      });
+```
