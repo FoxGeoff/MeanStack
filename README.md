@@ -489,3 +489,26 @@ module.exports = app;
 Check in server terminal:
 
  ![MongoDB](/mongoDB-from-db.jpg)
+
+* BUT THIS ERRORS BECAUSE IT IS async FIX by moving code inside "then" block
+* Task: Fix error move code inside then block (_id to id not yet mapped)
+
+```JavaScript
+app.get("/api/posts", (req, res, next) => {
+  //mongoose
+  Post.find().then(documents => {
+    console.log(documents);
+    res.status(200).json({
+      msg: "Posts feched successfully!",
+      posts: documents
+    });
+  });
+
+});
+
+module.exports = app;
+```
+
+ 
+
+## Task: Transforming Response Data  ( _id =>  id )

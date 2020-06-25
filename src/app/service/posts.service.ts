@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Post } from '../models/post';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,23 @@ export class PostsService {
   getPosts() {
     /* using a array copy, this is GOOD
     *  but creates an issue
-    *  Fix use an event driven approach rxjs
+    *  Fix be using an event driven approach with rxjs
     */
 
-    // on destroy not required here. Built into api.
-    this.http.get<{ message: string, posts: Post[] }>('http://localhost:3000/api/posts')
-      .subscribe((postData) => {
-        this.posts = postData.posts;
+    // on destroy not required here bcause it is built into the api.
+    this.http
+      .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts')
+      .pipe(map((postData) => {
+        return postData.posts.map(post => {
+          return {
+            title: post.title,
+            message: post.message,
+            id: post._id
+          };
+        });
+      }))
+      .subscribe((transformedPosts) => {
+        this.posts = transformedPosts;
         this.postsUpdate$.next([...this.posts]);
       });
 

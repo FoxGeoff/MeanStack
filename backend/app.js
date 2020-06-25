@@ -50,11 +50,12 @@ app.get("/api/posts", (req, res, next) => {
   //mongoose
   Post.find().then(documents => {
     console.log(documents);
+    res.status(200).json({
+      msg: "Posts feched successfully!",
+      posts: documents
+    });
   });
-  res.status(200).json({
-    msg: "Posts feched successfully!",
-    posts: documents
-  });
+
 });
 
 module.exports = app;
