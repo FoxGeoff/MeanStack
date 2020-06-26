@@ -1,7 +1,7 @@
 <mat-accordion *ngIf="posts?.length > 0">
   <mat-expansion-panel *ngFor="let post of posts">
     <mat-expansion-panel-header>
-      {{ post.title }}
+      {{post.id}}::{{ post.title }}
     </mat-expansion-panel-header>
     <p>{{ post.message }}</p>
     <mat-action-row>
