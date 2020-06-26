@@ -470,7 +470,7 @@ app.get("/api/posts", (req, res, next) => {
   ];
   // just by being the last in the chain it is returned.
   return res.status(200).json({
-    msg: "Posts feched succesfully!",
+    msg: "Posts fetched succesfully!",
     posts: posts,
   });
 });
@@ -487,7 +487,7 @@ app.get("/api/posts", (req, res, next) => {
     console.log(documents);
   });
   res.status(200).json({
-    msg: "Posts feched successfully!",
+    msg: "Posts fetched successfully!",
     posts: documents
   });
 });
@@ -508,7 +508,7 @@ app.get("/api/posts", (req, res, next) => {
   Post.find().then(documents => {
     console.log(documents);
     res.status(200).json({
-      msg: "Posts feched successfully!",
+      msg: "Posts fetched successfully!",
       posts: documents
     });
   });
