@@ -631,3 +631,42 @@ deletePost(postId: string) {
       });
   }
 ```
+
+## Task: Fix fail on consecutive create/delete post actions
+
+- Error to fix: ```Request URL:http://localhost:3000/api/posts/null```
+- Solution onDelete send back the server _id for the post with the msg.
+- On the backendserver/app.js:
+
+```JavaScript
+app.post("/api/posts", (req, res, next) => {
+  const post = new Post({
+    title: req.body.title,
+    message: req.body.message,
+  });
+  console.log(post);
+  // generates query to DB
+  post.save().then( createPost => {
+    res.status(201).json({
+      msg: "Post added sucessfully",
+      postId: createPost._id // new
+    });
+  });
+});
+```
+
+- On the postService.ts file:
+
+```JavaScript
+addPost(postTitle: string, msg: string) {
+    const post: Post = { id: null, title: postTitle, message: msg };
+    this.http.post<{ msg: string, postId: string }>('http://localhost:3000/api/posts', post)
+      .subscribe((responData) => {
+        console.log(responData.msg + '::' + responData.postId);
+        const id = responData.postId;
+        post.id = id;
+        this.posts.push(post);
+        this.postsUpdate$.next([...this.posts]);
+      });
+  }
+```

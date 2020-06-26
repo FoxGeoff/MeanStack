@@ -40,9 +40,11 @@ app.post("/api/posts", (req, res, next) => {
   });
   console.log(post);
   // generates query to DB
-  post.save();
-  res.status(201).json({
-    msg: "Post added sucessfully",
+  post.save().then( createPost => {
+    res.status(201).json({
+      msg: "Post added sucessfully",
+      postId: createPost._id
+    });
   });
 });
 
