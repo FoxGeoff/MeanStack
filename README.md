@@ -6,32 +6,32 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Task: Add: Material
 
-* Run: ```ng add @angular/material```
-* Task: Add: Material Module
-* Export all the mat components
-* Import material.module ine app.module
-* Restart VSCode to see the results
+- Run: `ng add @angular/material`
+- Task: Add: Material Module
+- Export all the mat components
+- Import material.module ine app.module
+- Restart VSCode to see the results
 
-### Using #textArea (template var) to set var  
+### Using #textArea (template var) to set var
 
-* onAddPost(postTextarea: HTMLTextAreaElement)
-* Use Console.dir(postTextarea) to read all DOM element metadata
+- onAddPost(postTextarea: HTMLTextAreaElement)
+- Use Console.dir(postTextarea) to read all DOM element metadata
 
 ### Using two way binding [(ngModel)]
 
-* app.model
+- app.model
 
 ```JavaScript
 import { FormsModule } from '@angular/forms';
 ```
 
-* Template:
+- Template:
 
 ```html
- <textarea [(ngModel)] = "enteredValue"></textarea>
+<textarea [(ngModel)]="enteredValue"></textarea>
 ```
 
-* Code
+- Code
 
 ```JavaScript
 newPost=''; //property
@@ -45,21 +45,20 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
 
 ## Task: Add: mat expansion panel
 
-* styling mat card in post-create component and mat expansion in post-list component
+- styling mat card in post-create component and mat expansion in post-list component
 
 ```css post-create
-.container
- {
-   margin: 20px;
-   width: 300px;
- }
+.container {
+  margin: 20px;
+  width: 300px;
+}
 ```
 
 ```css post-list
- :host {
-   display: block;
-   margin-top: 1rem;
- }
+:host {
+  display: block;
+  margin-top: 1rem;
+}
 ```
 
 ## Task: Add: Test posts
@@ -68,8 +67,8 @@ onAddPost(postTextarea: HTMLTextAreaElement) {
 
 ## Task: Creating Posts with Property & Event Binding
 
-* Task: Add: the new post to posts[] @Output()
-* Step #1: On raised event, @Output() postCreated to parent (app.component)
+- Task: Add: the new post to posts[] @Output()
+- Step #1: On raised event, @Output() postCreated to parent (app.component)
 
 ```JavaScript
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
@@ -96,12 +95,12 @@ onAddPost() {
   </div>
 
   <div class="list">
-    <app-post-list [posts] = "storedPosts"></app-post-list>
+    <app-post-list [posts]="storedPosts"></app-post-list>
   </div>
 </main>
 ```
 
-* Step #2: take storedPosts from the (parent: app.component) and @Intput() posts (child: component post-list)
+- Step #2: take storedPosts from the (parent: app.component) and @Intput() posts (child: component post-list)
 
 ```JavaScript
 export class PostListComponent implements OnInit {
@@ -121,63 +120,73 @@ export class AppComponent {
 
 ## Task: Adding forms (no validation yet!)
 
-* Use: ```<form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">```
-* Use: ```<input matInput type="text" name="title" ngModel/>```
-* Use: ```<button type="submit" [disabled]="!postForm.form.valid">Save</button>```
+- Use: `<form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">`
+- Use: `<input matInput type="text" name="title" ngModel/>`
+- Use: `<button type="submit" [disabled]="!postForm.form.valid">Save</button>`
 
 ```html
 <form class="form" #postForm="ngForm" (submit)="onAddPost(postForm)">
-    <mat-form-field class="full-width">
-      <mat-label>Post title</mat-label>
-      <input matInput type="text" name="title" ngModel/>
-    </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Post title</mat-label>
+    <input matInput type="text" name="title" ngModel />
+  </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Post message here...</mat-label>
-      <textarea matInput rows="4" name="message" ngModel></textarea>
-    </mat-form-field>
-
-    <p>
-      <button
-        mat-raised-button
-        color="accent"
-        type="submit"
-        [disabled]="!postForm.form.valid"
-      >
-        Save Post
-      </button>
-    </p>
-  </form>
-  ```
-
-  ```JavaScript
-  onAddPost(form: NgForm) {
-    const post = {
-      title: form.value.title,
-      message: form.value.message
-    };
-
-    console.log(`Title: ${post.title} Message: ${post.message}`);
-
-    this.postCreated.emit(post);
-  }
-  ```
-
-  ##Task: Add: Form validation error messages
-
-* (note: ngModel AND #msgVar="ngModle" used)
-
-  ```html
   <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Post message here...</mat-label>
-      <textarea matInput rows="4" name="message" required ngModel #msgVar="ngModel"> </textarea>
-      <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
-  </mat-form-field> ```
+    <mat-label>Post message here...</mat-label>
+    <textarea matInput rows="4" name="message" ngModel></textarea>
+  </mat-form-field>
+
+  <p>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="!postForm.form.valid"
+    >
+      Save Post
+    </button>
+  </p>
+</form>
+```
+
+```JavaScript
+onAddPost(form: NgForm) {
+  const post = {
+    title: form.value.title,
+    message: form.value.message
+  };
+
+  console.log(`Title: ${post.title} Message: ${post.message}`);
+
+  this.postCreated.emit(post);
+}
+```
+
+## Task: Add: Form validation error messages
+
+- (note: ngModel AND #msgVar="ngModle" used)
+
+  ````html
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Post message here...</mat-label>
+    <textarea
+      matInput
+      rows="4"
+      name="message"
+      required
+      ngModel
+      #msgVar="ngModel"
+    >
+    </textarea>
+    <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
+  </mat-form-field>
+  ```
+  ````
 
 ## Task: Add: PostService
 
-* Register service in app.module ``providers:[postservice]
-* OR register using (both will create a Singleton at the root level)
+- Register service in app.module ``providers:[postservice]
+- OR register using (both will create a Singleton at the root level)
 
 ```JavaScript
 @Injectable({
@@ -187,7 +196,7 @@ export class AppComponent {
 
 ## Task: Calling GET Post (observables) Subject emit
 
-* Replacing "emit" with rxjs "Subject"
+- Replacing "emit" with rxjs "Subject"
 
 ```JavaScript
 private postsUpdate$ = new Subject<Post[]>();
@@ -204,10 +213,10 @@ addPost(postTitle: string, msg: string) {
     const post: Post = {title: postTitle, message: msg};
     this.posts.push(post);
     this.postsUpdate$.next([...this.posts]);
-  }  
+  }
 ```
 
-* Task: Calling GET Post (observables) Subscribe & ngOnDestroy
+- Task: Calling GET Post (observables) Subscribe & ngOnDestroy
 
 ```JavaScript
 export class PostListComponent implements OnInit, OnDestroy{
@@ -222,7 +231,7 @@ constructor(private postsService: PostsService) { }
 
   ngOnDestroy(): void {
     this.postSubscription.unsubscribe();
-  }  
+  }
 
 ```
 
@@ -287,7 +296,7 @@ server.on("listening", onListening);
 server.listen(port);
 ```
 
-* The backend/app.js file
+- The backend/app.js file
 
 ```JavaScript
 // node server.js (not in package.json)
@@ -401,9 +410,9 @@ app.use((req, res, next) => {
 
 ## Task: Adding the POST Backend Point
 
-* Run:```npm install body-parser --save```
+- Run:`npm install body-parser --save`
 
-* app.js:
+- app.js:
 
 ```JavaScript
 const bodyParser = require("body-parser");
@@ -423,11 +432,11 @@ app.post("/api/posts", (req, res, next) => {
 
 ## Task: Setting up Mongoose
 
-* Run: ```npm install mongoose --save```
+- Run: `npm install mongoose --save`
 
 ## Task: Understanding Mongoose Schemas & Models
 
-* Add: backend model "post.js"
+- Add: backend model "post.js"
 
 ## Task: Creating a POST Instance
 
@@ -435,9 +444,9 @@ app.post("/api/posts", (req, res, next) => {
 
 ## Task: Storing Data in a Database
 
-* Storing Data in a Database (DB Query)
-* Check Database using shell
-* MongoDB Shell login - Check on database collection:
+- Storing Data in a Database (DB Query)
+- Check Database using shell
+- MongoDB Shell login - Check on database collection:
 
 ![MongoDB](/mongoDB.jpg)
 
@@ -488,10 +497,10 @@ module.exports = app;
 
 Check in server terminal:
 
- ![MongoDB](/mongoDB-from-db.jpg)
+![MongoDB](/mongoDB-from-db.jpg)
 
-* BUT THIS ERRORS BECAUSE IT IS async FIX by moving code inside "then" block
-* Task: Fix error move code inside then block (_id to id not yet mapped)
+- BUT THIS ERRORS BECAUSE IT IS async FIX by moving code inside "then" block
+- Task: Fix error move code inside then block (\_id to id not yet mapped)
 
 ```JavaScript
 app.get("/api/posts", (req, res, next) => {
@@ -509,7 +518,7 @@ app.get("/api/posts", (req, res, next) => {
 module.exports = app;
 ```
 
-## Task: Transforming Response Data  ( _id =>  id )
+## Task: Transforming Response Data ( \_id => id )
 
 ```JavaScript
   getPosts() {
@@ -534,4 +543,21 @@ module.exports = app;
         this.posts = transformedPosts;
         this.postsUpdate$.next([...this.posts]);
       });
+```
+
+## Check the fix for the error
+
+Checked: In Browser @ localhost:3000/api/posts:
+
+```Json
+{
+  "msg":"Posts feched successfully!",
+  "posts":[
+    {"_id":"5ef3cfd9f45c2457b8d67d93",
+    "title":"Save new to database",
+    "message":"save to database ( Test )",
+    "__v":0
+    }
+  ]
+}
 ```
