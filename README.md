@@ -674,3 +674,5 @@ addPost(postTitle: string, msg: string) {
 ## Enhancing the Frontend & Overall App
 
 ## Task: Adding routing
+
+## Task: Add Menu items
