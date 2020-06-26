@@ -561,3 +561,59 @@ Checked: In Browser @ localhost:3000/api/posts:
   ]
 }
 ```
+
+## Task: Deleting Documents
+
+- backend/app.js
+
+```JavaScript
+app.delete("/api/posts/:id", (req, res, next) => {
+  console.log(req.params.id);
+  res.status(200).json({ msg: "Post deleted!" });
+});
+```
+
+- postService.ts
+
+```typeScript
+deletePost(postId: string) {
+    this.http.delete(`http://localhost:3000/api/posts/${postId}`)
+     .subscribe(() => {
+       console.log('Deleted!');
+     });
+  }
+```
+
+- post-list.component.ts
+
+```TypeScript
+onDelete(postId: string) {
+    this.postsService.deletePost(postId);
+  }
+```
+
+- html
+
+```html
+<button mat-button color="warn" (click)="onDelete(post.id)">
+  DELETE
+</button>
+```
+
+- Check result:
+
+```json
+Connected to database!
+5ef3cfd9f45c2457b8d67d93
+```
+
+## Task: Delete one record in DB
+
+```JavaScript
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(req.params.id);
+    res.status(200).json({ msg: "Post deleted!" });
+  });
+});
+```

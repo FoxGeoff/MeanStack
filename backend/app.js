@@ -48,14 +48,20 @@ app.post("/api/posts", (req, res, next) => {
 
 app.get("/api/posts", (req, res, next) => {
   //mongoose
-  Post.find().then(documents => {
+  Post.find().then((documents) => {
     console.log(documents);
     res.status(200).json({
-      msg: "Posts feched successfully!",
-      posts: documents
+      msg: "Posts fetched successfully!",
+      posts: documents,
     });
   });
+});
 
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(req.params.id);
+    res.status(200).json({ msg: "Post deleted successfully!" });
+  });
 });
 
 module.exports = app;
