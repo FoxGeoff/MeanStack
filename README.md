@@ -617,3 +617,17 @@ app.delete("/api/posts/:id", (req, res, next) => {
   });
 });
 ```
+
+## Task: Updating the Frontend after Deleting Posts
+
+```JavaScript
+deletePost(postId: string) {
+    this.http.delete(`http://localhost:3000/api/posts/${postId}`)
+      .subscribe(() => {
+        // update posts[] by removing one with postId (fails on a create/delete)
+        const updatedPosts = this.posts.filter(post => post.id !== postId);
+        this.posts = updatedPosts;
+        this.postsUpdate$.next([...this.posts]);
+      });
+  }
+```
