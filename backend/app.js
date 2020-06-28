@@ -48,6 +48,18 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
+app.put("api/post/:id", (req, res, next) => {
+  const post = new Post({
+    title: req.body.title,
+    message: req.body.message,
+  });
+  Post.updateOne({_id: req.params.id }, post).then(result => {
+    console.log(result);
+    result.status(200).json({ msg: "Post updatted successfully!"})
+  });
+});
+
+
 app.get("/api/posts", (req, res, next) => {
   //mongoose
   Post.find().then((documents) => {

@@ -45,8 +45,8 @@ export class PostsService {
     return this.postsUpdate$.asObservable();
   }
 
-  addPost(postTitle: string, msg: string) {
-    const post: Post = { id: null, title: postTitle, message: msg };
+  addPost(postTitle: string, postMessage: string) {
+    const post: Post = { id: null, title: postTitle, message: postMessage };
     this.http.post<{ msg: string, postId: string }>('http://localhost:3000/api/posts', post)
       .subscribe((responData) => {
         console.log(responData.msg + '::' + responData.postId);
@@ -55,6 +55,12 @@ export class PostsService {
         this.posts.push(post);
         this.postsUpdate$.next([...this.posts]);
       });
+  }
+
+  updatePost(id: string, postTitle: string, postMessage: string) {
+    const post: Post = { id: null, title: postTitle, message: postMessage };
+    this.http.put(`http://localhost:3000/api/posts/${id}` , post )
+    .subscribe(resonse => console.log(Response));
   }
 
   deletePost(postId: string) {
