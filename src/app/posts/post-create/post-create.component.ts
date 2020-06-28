@@ -12,9 +12,10 @@ import { Post } from 'src/app/models/post';
 })
 export class PostCreateComponent implements OnInit {
   noPosts = 'No posts to display';
+  post: Post;
   private mode = 'create';
   private postId: string;
-  post: Post;
+
 
   constructor(private postService: PostsService, private route: ActivatedRoute) { }
 

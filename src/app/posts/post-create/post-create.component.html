@@ -6,7 +6,7 @@
         matInput
         type="text"
         name="title"
-        ngModel
+        [ngModel]="post.title"
         required
         #titleVar="ngModel"
       />
@@ -15,7 +15,16 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Post message</mat-label>
-      <textarea matInput rows="4" name="message" required ngModel #msgVar="ngModel" placeholder="text message here..."> </textarea>
+      <textarea
+        matInput
+        rows="4"
+        name="message"
+        required
+        [ngModel] = "post.message"
+        #msgVar="ngModel"
+        placeholder="text message here..."
+      >
+      </textarea>
       <mat-error *ngIf="msgVar.invalid">Title required</mat-error>
     </mat-form-field>
 
@@ -27,4 +36,3 @@
     </p>
   </form>
 </mat-card>
-
