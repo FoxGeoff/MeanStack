@@ -20,6 +20,8 @@ export class PostCreateComponent implements OnInit {
   constructor(private postService: PostsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.post = new Post();
+
     this.route.paramMap
       .subscribe((paramMap: ParamMap) => {
         if (paramMap.has('postId')) {
