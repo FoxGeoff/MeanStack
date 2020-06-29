@@ -28,22 +28,27 @@ export class PostCreateComponent implements OnInit {
           this.post = this.postService.getPost(this.postId);
         } else {
           this.mode = 'create';
-          this.mode = null;
+          this.postId = null;
         }
       });
 
   }
 
-  onAddPost(form: NgForm) {
+  onSavePost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-
+    if (this.mode === 'create') {
+      this.postService.addPost(form.value.title, form.value.message);
+    } else {
+      this.postService.updatePost(
+        this.postId,
+        form.value.title,
+        form.value.message
+       );
+    }
     console.log(`Title: ${form.value.title} Message: ${form.value.message}`);
-
     /* Replaced this.postCreated.emit(post); by the postService */
-
-    this.postService.addPost(form.value.title, form.value.message);
     form.resetForm();
   }
 }

@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, PUT, OPTIONS"
   );
   next();
 });
@@ -40,10 +40,10 @@ app.post("/api/posts", (req, res, next) => {
   });
   console.log(post);
   // generates query to DB
-  post.save().then( createPost => {
+  post.save().then((createPost) => {
     res.status(201).json({
       msg: "Post added sucessfully",
-      postId: createPost._id
+      postId: createPost._id,
     });
   });
 });
@@ -53,12 +53,11 @@ app.put("api/post/:id", (req, res, next) => {
     title: req.body.title,
     message: req.body.message,
   });
-  Post.updateOne({_id: req.params.id }, post).then(result => {
+  Post.updateOne({ _id: req.params.id }, post).then((result) => {
     console.log(result);
-    result.status(200).json({ msg: "Post updatted successfully!"})
+    result.status(200).json({ msg: "Post updatted successfully!" });
   });
 });
-
 
 app.get("/api/posts", (req, res, next) => {
   //mongoose
