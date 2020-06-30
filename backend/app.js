@@ -48,24 +48,36 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
-app.put("api/post/:id", (req, res, next) => {
+app.put("/api/post/:id", (req, res, next) => {
   const post = new Post({
+    _id: req.body.id,
     title: req.body.title,
     message: req.body.message,
   });
   Post.updateOne({ _id: req.params.id }, post).then((result) => {
     console.log(result);
-    res.status(200).json({ msg: "Post updatted successfully!" });
+    res.status(200).json({ msg: "Updated successfully!" });
+  });
+});
+
+
+app.get("/api/posts/:id", (req, res, next) => {
+  Post.findById({ _id: req.params.id}).then((result) => {
+    console.log(result);
+    res.status(200).json({
+      msg: "Post fetched successfully!",
+      posts: result,
+    });
   });
 });
 
 app.get("/api/posts", (req, res, next) => {
   //mongoose
-  Post.find().then((documents) => {
-    console.log(documents);
+  Post.find().then((result) => {
+    console.log(result);
     res.status(200).json({
       msg: "Posts fetched successfully!",
-      posts: documents,
+      posts: result,
     });
   });
 });

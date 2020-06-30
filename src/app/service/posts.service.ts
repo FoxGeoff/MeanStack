@@ -58,7 +58,7 @@ export class PostsService {
   }
 
   updatePost(id: string, postTitle: string, postMessage: string) {
-    const post: Post = { id: null, title: postTitle, message: postMessage };
+    const post: Post = { id, title: postTitle, message: postMessage };
     this.http.put(`http://localhost:3000/api/posts/${id}` , post )
     .subscribe(response => console.log(response));
   }

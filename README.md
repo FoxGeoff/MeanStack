@@ -679,4 +679,6 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Creating the “edit” Form
 
-- 
+- Task: Finishing the Edit Feature
+- on server "GET" one item
+- on server "PUT" _id: req.body.id
