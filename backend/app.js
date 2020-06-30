@@ -48,21 +48,26 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
+/* findOneAndUpdate, updateOne
+
+*/
 app.put("/api/post/:id", (req, res, next) => {
-  const post = new Post({
+  const post1 = new Post({
     _id: req.body.id,
     title: req.body.title,
     message: req.body.message,
   });
-  Post.updateOne({ _id: req.params.id }, post).then((result) => {
+  Post.updateOne(
+    { _id: new mongodb.ObjectId(req.body.id) },
+    { $Set: post1 }
+  ).then((result) => {
     console.log(result);
     res.status(200).json({ msg: "Updated successfully!" });
   });
 });
 
-
 app.get("/api/posts/:id", (req, res, next) => {
-  Post.findById({ _id: req.params.id}).then((result) => {
+  Post.findById({ _id: req.params.id }).then((result) => {
     console.log(result);
     res.status(200).json({
       msg: "Post fetched successfully!",
