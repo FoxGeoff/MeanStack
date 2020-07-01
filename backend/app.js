@@ -52,26 +52,32 @@ app.post("/api/posts", (req, res, next) => {
 /* Could be PUT or PATCH */
 /* used for the edit form */
 app.put("/api/posts/:id", (req, res, next) => {
-  const post1 = new Post({
-    _id: req.body.id, // <= was in org code
+  const updatedPost = new Post({
+    _id: req.body.id,
     title: req.body.title,
     message: req.body.message,
   });
   /* Using Mongoose model: post1: Post */
   var query = { _id: req.params.id };
-  Post.findOneAndUpdate(query, post1).then((result) => {
+  Post.findOneAndUpdate(query, updatedPost).then((result) => {
     console.log(result);
-    res.status(200).json({ msg: "Updated successfully!" });
+    res.status(200).json({ msg: "Post updated successfully!" });
   });
 });
 
 app.get("/api/posts/:id", (req, res, next) => {
   Post.findById({ _id: req.params.id }).then((result) => {
-    console.log(result);
-    res.status(200).json({
-      msg: "Post fetched successfully!",
-      posts: result,
-    });
+    if (result) {
+      console.log(result);
+      res.status(200).json({
+        msg: "Post fetched successfully!",
+        posts: result,
+      });
+    } else {
+      res.status(404).json({
+        msg: 'Post not found'
+      });
+    }
   });
 });
 
