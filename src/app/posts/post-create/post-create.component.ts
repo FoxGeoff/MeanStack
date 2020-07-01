@@ -17,25 +17,26 @@ export class PostCreateComponent implements OnInit {
   private postId: string;
 
 
-  constructor(private postService: PostsService, private route: ActivatedRoute) { }
+  constructor(public postService: PostsService, public route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.post = new Post();
-
+    /* built-in Observable - no need to unsubscribe */
     this.route.paramMap
       .subscribe((paramMap: ParamMap) => {
         if (paramMap.has('postId')) {
           this.mode = 'edit';
           this.postId = paramMap.get('postId');
+          /* Alternate would be to fetch Post from the server */
           this.post = this.postService.getPost(this.postId);
         } else {
           this.mode = 'create';
           this.postId = null;
         }
       });
-
   }
 
+  /* renamed from onAddPost(form:NgForm) */
   onSavePost(form: NgForm) {
     if (form.invalid) {
       return;

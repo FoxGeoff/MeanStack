@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE, PUT, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
   next();
 });
@@ -48,19 +48,18 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
-/* findOneAndUpdate, updateOne
-
-*/
-app.put("/api/post/:id", (req, res, next) => {
+/* findOneAndUpdate, updateOne */
+/* Could be PUT or PATCH */
+/* used for the edit form */
+app.put("/api/posts/:id", (req, res, next) => {
   const post1 = new Post({
-    _id: req.body.id,
+    _id: req.body.id, // <= was in org code
     title: req.body.title,
     message: req.body.message,
   });
-  Post.updateOne(
-    { _id: new mongodb.ObjectId(req.body.id) },
-    { $Set: post1 }
-  ).then((result) => {
+  /* Using Mongoose model: post1: Post */
+  var query = { _id: req.params.id };
+  Post.findOneAndUpdate(query, post1).then((result) => {
     console.log(result);
     res.status(200).json({ msg: "Updated successfully!" });
   });

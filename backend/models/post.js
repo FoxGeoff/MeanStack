@@ -5,5 +5,5 @@ const postSchema = mongoose.Schema({
   title: { type: String, required: true },
   message: { type: String, required: true },
 });
-// this will automaticly by stored in collection "posts"
+// this will automaticly be stored in collection "posts"
 module.exports = mongoose.model('Post', postSchema);

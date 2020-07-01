@@ -14,12 +14,12 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts() {
-    /* using a array copy, this is GOOD
-    *  but creates an issue
+    /* using a array copy, is best practice
+    *  but it can create an issue
     *  Fix be using an event driven approach with rxjs
     */
 
-    // on destroy not required here bcause it is built into the api.
+    /* on destroy not required here bcause it is built into the api. */
     this.http
       .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts')
       .pipe(map((postData) => {
@@ -37,8 +37,10 @@ export class PostsService {
       });
   }
 
+  /* used for the edit form */
   getPost(id: string) {
-    return {...this.posts.find(p => p.id === id)};
+    /* expands the post object and makes a copy to return */
+    return { ...this.posts.find(p => p.id === id) };
   }
 
   getPostUpdate$() {
@@ -57,16 +59,17 @@ export class PostsService {
       });
   }
 
-  updatePost(id: string, postTitle: string, postMessage: string) {
-    const post: any = { _id: id, title: postTitle, message: postMessage };
-    this.http.put(`http://localhost:3000/api/posts/${id}` , post )
-    .subscribe(response => console.log(response));
+  /* used for the edit form */
+  updatePost(postId: string, postTitle: string, postMessage: string) {
+    const post: Post = { id: postId, title: postTitle, message: postMessage };
+    this.http.put(`http://localhost:3000/api/posts/${postId}`, post)
+      .subscribe(response => console.log(response));
   }
 
   deletePost(postId: string) {
     this.http.delete(`http://localhost:3000/api/posts/${postId}`)
       .subscribe(() => {
-        // update posts[] by removing one with postId (fails on a create/delete)
+        /* update posts[] list by just removing one with postId */
         const updatedPosts = this.posts.filter(post => post.id !== postId);
         this.posts = updatedPosts;
         this.postsUpdate$.next([...this.posts]);
