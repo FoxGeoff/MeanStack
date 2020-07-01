@@ -61,9 +61,19 @@ export class PostsService {
 
   /* used for the edit form */
   updatePost(postId: string, postTitle: string, postMessage: string) {
-    const post: Post = { id: postId, title: postTitle, message: postMessage };
-    this.http.put(`http://localhost:3000/api/posts/${postId}`, post)
-      .subscribe(response => console.log(response));
+    const newPost: Post = { id: postId, title: postTitle, message: postMessage };
+    this.http
+      .put(`http://localhost:3000/api/posts/${postId}`, newPost)
+      .subscribe(response => {
+        console.log(response);
+        /* Now update the local array, this.posts with the newPost*/
+        const updatedPosts = [...this.posts];
+        const postIndex = updatedPosts.findIndex(p => p.id === newPost.id);
+        updatedPosts[postIndex] = newPost;
+        this.posts = updatedPosts;
+        this.postsUpdate$.next([...this.posts]);
+        /* Now update the sever array */
+      });
   }
 
   deletePost(postId: string) {

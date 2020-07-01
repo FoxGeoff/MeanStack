@@ -682,3 +682,8 @@ addPost(postTitle: string, msg: string) {
 - Task: Finishing the Edit Feature
 - on server "GET" one item
 - on server "PUT" _id: req.body.id
+
+## Task: Updating Posts on Server
+
+- Update local posts array
+- Update server posts array
