@@ -687,3 +687,8 @@ addPost(postTitle: string, msg: string) {
 
 - Update local posts array
 - Update server posts array
+- Use server posts array for "edit posts form"
+- Use in init async get post from server
+- Note: requires on form [ngModel] = post?.title
+
+## Task: Re-Organizing Backend Routes

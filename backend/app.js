@@ -68,14 +68,14 @@ app.put("/api/posts/:id", (req, res, next) => {
 app.get("/api/posts/:id", (req, res, next) => {
   Post.findById({ _id: req.params.id }).then((result) => {
     if (result) {
-      console.log(result);
+      console.log( 'From Server' + result);
       res.status(200).json({
         msg: "Post fetched successfully!",
-        posts: result,
+        post: result,
       });
     } else {
       res.status(404).json({
-        msg: 'Post not found'
+        msg: "Post not found",
       });
     }
   });

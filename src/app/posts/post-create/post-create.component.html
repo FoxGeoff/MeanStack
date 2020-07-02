@@ -2,11 +2,12 @@
   <form class="form" #postForm="ngForm" (submit)="onSavePost(postForm)">
     <mat-form-field class="full-width">
       <mat-label>Post title</mat-label>
+      <!-- If we are read async post? (evis operator is necessary) -->
       <input
         matInput
         type="text"
         name="title"
-        [ngModel]="post.title"
+        [ngModel]="post?.title"
         required
         #titleVar="ngModel"
       />
@@ -20,7 +21,7 @@
         rows="4"
         name="message"
         required
-        [ngModel]="post.message"
+        [ngModel]="post?.message"
         #msgVar="ngModel"
         placeholder="text message here..."
       >

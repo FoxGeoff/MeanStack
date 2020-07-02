@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -37,10 +37,15 @@ export class PostsService {
       });
   }
 
-  /* used for the edit form */
-  getPost(id: string) {
-    /* expands the post object and makes a copy to return */
-    return { ...this.posts.find(p => p.id === id) };
+  /* used for the edit form, init on create-post*/
+  getPostLocal(postId: string) {
+    return { ...this.posts.find(p => p.id === postId) };
+  }
+
+  /* used for the edit form, init on create-post*/
+  getPost(postId: string) {
+    return this.http
+      .get<{ posts: any, msg: string }>(`http://localhost:3000/api/posts/${postId}`);
   }
 
   getPostUpdate$() {
@@ -65,14 +70,12 @@ export class PostsService {
     this.http
       .put(`http://localhost:3000/api/posts/${postId}`, newPost)
       .subscribe(response => {
-        console.log(response);
         /* Now update the local array, this.posts with the newPost*/
         const updatedPosts = [...this.posts];
         const postIndex = updatedPosts.findIndex(p => p.id === newPost.id);
         updatedPosts[postIndex] = newPost;
         this.posts = updatedPosts;
         this.postsUpdate$.next([...this.posts]);
-        /* Now update the sever array */
       });
   }
 

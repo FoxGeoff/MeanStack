@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { PostsService } from 'src/app/service/posts.service';
@@ -10,7 +10,7 @@ import { Post } from 'src/app/models/post';
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.css']
 })
-export class PostCreateComponent implements OnInit {
+export class PostCreateComponent implements OnInit, AfterViewInit {
   noPosts = 'No posts to display';
   post: Post;
   private mode = 'create';
@@ -27,8 +27,20 @@ export class PostCreateComponent implements OnInit {
         if (paramMap.has('postId')) {
           this.mode = 'edit';
           this.postId = paramMap.get('postId');
-          /* Alternate would be to fetch Post from the server */
-          this.post = this.postService.getPost(this.postId);
+
+          /* Fetch Post local  */
+          // this.post = this.postService.getPostLocal(this.postId);
+
+          /* Fetch Post from the server */
+          this.postService.getPost(this.postId)
+            .subscribe((postData) => {
+              this.post = {
+                id: postData.posts._id,
+                title: postData.posts.title,
+                message: postData.posts.message
+              };
+              console.log(`From server Message: ${postData.msg}`);
+            });
         } else {
           this.mode = 'create';
           this.postId = null;
@@ -36,22 +48,24 @@ export class PostCreateComponent implements OnInit {
       });
   }
 
+  ngAfterViewInit(): void { }
+
   /* renamed from onAddPost(form:NgForm) */
   onSavePost(form: NgForm) {
     if (form.invalid) {
       return;
     }
     if (this.mode === 'create') {
+      /* Replaced this.postCreated.emit(post); by the postService.addPost(post) */
       this.postService.addPost(form.value.title, form.value.message);
+      form.resetForm();
     } else {
       this.postService.updatePost(
         this.postId,
         form.value.title,
         form.value.message
-       );
+      );
     }
-    console.log(`Title: ${form.value.title} Message: ${form.value.message}`);
-    /* Replaced this.postCreated.emit(post); by the postService */
-    form.resetForm();
+    console.log(`onSave(form): Title: ${form.value.title} Message: ${form.value.message}`);
   }
 }
