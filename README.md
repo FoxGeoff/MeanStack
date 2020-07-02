@@ -692,3 +692,8 @@ addPost(postTitle: string, msg: string) {
 - Note: requires on form [ngModel] = post?.title
 
 ## Task: Re-Organizing Backend Routes
+
+## Task: Adding Loading Spinners
+
+- Redirect back to post-list page when done
+- Add a spinner during loading
