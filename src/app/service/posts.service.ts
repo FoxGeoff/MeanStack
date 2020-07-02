@@ -45,7 +45,7 @@ export class PostsService {
   /* used for the edit form, init on create-post*/
   getPost(postId: string) {
     return this.http
-      .get<{ posts: any, msg: string }>(`http://localhost:3000/api/posts/${postId}`);
+      .get<{ post: any, msg: string }>(`http://localhost:3000/api/posts/${postId}`);
   }
 
   getPostUpdate$() {

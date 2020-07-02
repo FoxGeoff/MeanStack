@@ -35,9 +35,9 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
           this.postService.getPost(this.postId)
             .subscribe((postData) => {
               this.post = {
-                id: postData.posts._id,
-                title: postData.posts.title,
-                message: postData.posts.message
+                id: postData.post._id,
+                title: postData.post.title,
+                message: postData.post.message
               };
               console.log(`From server Message: ${postData.msg}`);
             });
