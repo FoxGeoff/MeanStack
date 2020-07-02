@@ -70,7 +70,10 @@ export class PostsService {
     this.http
       .put(`http://localhost:3000/api/posts/${postId}`, newPost)
       .subscribe(response => {
-        /* Now update the local array, this.posts with the newPost*/
+        /* Now update the local array, this.posts with the newPost - BUT NOW:
+          Note: If we never vist our posts list page then there is nothing in the array
+          and updatedPosts is empty - so this will fail!
+        */
         const updatedPosts = [...this.posts];
         const postIndex = updatedPosts.findIndex(p => p.id === newPost.id);
         updatedPosts[postIndex] = newPost;
