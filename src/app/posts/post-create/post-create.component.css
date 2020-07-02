@@ -17,3 +17,7 @@
 mat-spinner {
   margin: auto;
 }
+
+.pickFile {
+  margin: 18px 0;
+}

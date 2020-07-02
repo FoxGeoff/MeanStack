@@ -1,6 +1,11 @@
 <mat-card class="matCard">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form class="form" #postForm="ngForm" (submit)="onSavePost(postForm)" *ngIf="!isLoading">
+  <form
+    class="form"
+    #postForm="ngForm"
+    (submit)="onSavePost(postForm)"
+    *ngIf="!isLoading"
+  >
     <mat-form-field class="full-width">
       <mat-label>Post title</mat-label>
       <!-- If we are read async post? (evis operator is necessary) -->
@@ -14,6 +19,11 @@
       />
       <mat-error *ngIf="titleVar.invalid">Title required</mat-error>
     </mat-form-field>
+
+    <div class="pickFile">
+      <button mat-stroked-button type="button" (click) = "filePicker.click()">Pick File</button>
+      <input type="file" hidden #filePicker/>
+    </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Post message</mat-label>

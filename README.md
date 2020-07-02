@@ -697,3 +697,11 @@ addPost(postTitle: string, msg: string) {
 
 - Redirect back to post-list page when done
 - Add a spinner during loading
+
+## Kanban Task #6: Adding Image Uploads to our App
+
+## Task: Adding the File Input Button
+
+- Add Button and input type="file"
+
+## Task: Converting the Form from a Template Driven to a Reactive
