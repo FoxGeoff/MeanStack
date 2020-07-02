@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { PostsService } from 'src/app/service/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -13,14 +13,23 @@ import { Post } from 'src/app/models/post';
 export class PostCreateComponent implements OnInit, AfterViewInit {
   noPosts = 'No posts to display';
   post: Post;
-  isLoading =  false;
+  isLoading = false;
   private mode = 'create';
   private postId: string;
-
+  form: FormGroup;
 
   constructor(public postService: PostsService, public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      title: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)]
+      }),
+      message: new FormControl(null, {
+        validators: [Validators.required]
+      })
+    });
+
     this.post = new Post();
     /* built-in Observable - no need to unsubscribe */
     this.route.paramMap
@@ -43,6 +52,10 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
                 message: postData.post.message
               };
               console.log(`From server Message: ${postData.msg}`);
+              this.form.setValue({
+                title: this.post.title,
+                message: this.post.message
+              });
             });
         } else {
           this.mode = 'create';
@@ -54,22 +67,23 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void { }
 
   /* renamed from onAddPost(form:NgForm) */
-  onSavePost(form: NgForm) {
-    if (form.invalid) {
+  onSavePost() {
+    if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
       /* Replaced this.postCreated.emit(post); by the postService.addPost(post) */
-      this.postService.addPost(form.value.title, form.value.message);
-      form.resetForm();
+      this.postService.addPost(this.form.value.title, this.form.value.message);
     } else {
       this.postService.updatePost(
         this.postId,
-        form.value.title,
-        form.value.message
+        this.form.value.title,
+        this.form.value.message
       );
     }
-    console.log(`onSave(form): Title: ${form.value.title} Message: ${form.value.message}`);
+    console.log(`onSave(form): Title: ${this.form.value.title} Message: ${this.form.value.message}`);
+    this.form.reset();
+
   }
 }
