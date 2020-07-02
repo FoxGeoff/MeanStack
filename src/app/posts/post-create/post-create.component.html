@@ -1,5 +1,6 @@
 <mat-card class="matCard">
-  <form class="form" #postForm="ngForm" (submit)="onSavePost(postForm)">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form class="form" #postForm="ngForm" (submit)="onSavePost(postForm)" *ngIf="!isLoading">
     <mat-form-field class="full-width">
       <mat-label>Post title</mat-label>
       <!-- If we are read async post? (evis operator is necessary) -->

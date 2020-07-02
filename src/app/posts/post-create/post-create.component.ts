@@ -13,6 +13,7 @@ import { Post } from 'src/app/models/post';
 export class PostCreateComponent implements OnInit, AfterViewInit {
   noPosts = 'No posts to display';
   post: Post;
+  isLoading =  false;
   private mode = 'create';
   private postId: string;
 
@@ -32,8 +33,10 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
           // this.post = this.postService.getPostLocal(this.postId);
 
           /* Fetch Post from the server */
+          this.isLoading = true;
           this.postService.getPost(this.postId)
             .subscribe((postData) => {
+              this.isLoading = false;
               this.post = {
                 id: postData.post._id,
                 title: postData.post.title,
@@ -55,6 +58,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     if (this.mode === 'create') {
       /* Replaced this.postCreated.emit(post); by the postService.addPost(post) */
       this.postService.addPost(form.value.title, form.value.message);
