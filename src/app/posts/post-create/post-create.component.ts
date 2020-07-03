@@ -14,9 +14,10 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
   noPosts = 'No posts to display';
   post: Post;
   isLoading = false;
+  form: FormGroup;
+  imagePreview: string;
   private mode = 'create';
   private postId: string;
-  form: FormGroup;
 
   constructor(public postService: PostsService, public route: ActivatedRoute) { }
 
@@ -28,7 +29,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       message: new FormControl(null, {
         validators: [Validators.required]
       }),
-      image: new FormControl(null, {validators: Validators.required})
+      image: new FormControl(null, { validators: Validators.required })
     });
 
     this.post = new Post();
@@ -72,12 +73,23 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     /* image control in not an actual control on the form, file JS obj */
-    this.form.patchValue({image: file});
+    this.form.patchValue({ image: file });
     this.form.get('image').updateValueAndValidity();
-    console.log(file);
-    console.log(this.form);
+    // console.log(file);
+    // console.log(this.form);
+
+    /* store an image previw */
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (!(reader instanceof ArrayBuffer)) {
+        this.imagePreview = (reader.result as string);
+      } else {
+        throw new Error('Unexpected result not a string value');
+      }
+    };
+    reader.readAsDataURL(file);
   }
-//
+  //
   /* renamed from onAddPost(form:NgForm) */
   onSavePost() {
     if (this.form.invalid) {

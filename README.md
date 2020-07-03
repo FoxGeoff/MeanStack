@@ -707,3 +707,5 @@ addPost(postTitle: string, msg: string) {
 ## Task: Converting the Form from a Template Driven to a Reactive
 
 ## Task: Adding Image Controls to Store the Image
+
+## Task: Adding an Image Preview
