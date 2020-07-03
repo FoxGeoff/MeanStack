@@ -1,8 +1,33 @@
 const express = required("express");
+const multer = required("multer");
 const Post = require("../models/post");
+
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+const MIME_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg",
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    /* Path relative to server.js */
+    cb(error, "backend/images");
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname.toLowerCase().split(" ").join("-");
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + Date.now() + "." + ext);
+  },
+});
+
+router.post("", multer(storage).single("image"), (req, res, next) => {
   const post = new Post({
     title: req.body.title,
     message: req.body.message,
@@ -37,7 +62,7 @@ router.put("/:id", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   Post.findById({ _id: req.params.id }).then((result) => {
     if (result) {
-      console.log( 'From Server' + result);
+      console.log("From Server" + result);
       res.status(200).json({
         msg: "Post fetched successfully!",
         post: result,

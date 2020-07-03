@@ -1,8 +1,10 @@
-# Project: MeanStack
+# Github Project : MeanStack
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
-## Safari Angular and Node.js - The MEAN Stack Guide
+## **Kanban Project: Safari Angular and Node.js - The MEAN Stack Guide**
+
+## **Kanban Task #2: The Angular Frontend - Understanding the Basics**
 
 ## Task: Add: Material
 
@@ -235,6 +237,8 @@ constructor(private postsService: PostsService) { }
 
 ```
 
+## **Kanban Task #3: Adding NodeJS to our Project**
+
 ## Adding a node + Express Backend
 
 ## Task: Add server.js
@@ -383,6 +387,8 @@ module.exports = app;
 
 ## Task: Allowing CORS
 
+## Task: Adding Express Framework
+
 ```JavaScript
 // npm install express --save
 // this is the express framework app
@@ -427,6 +433,8 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 ```
+
+## **Kanban Task #4: Working with MongoDB**
 
 ## Task: Setting up MongoDB
 
@@ -673,6 +681,8 @@ addPost(postTitle: string, msg: string) {
 
 ## Enhancing the Frontend & Overall App
 
+## **Kanban Task #5: Enhancing the App**
+
 ## Task: Adding routing
 
 ## Task: Add Menu items
@@ -698,7 +708,7 @@ addPost(postTitle: string, msg: string) {
 - Redirect back to post-list page when done
 - Add a spinner during loading
 
-## Kanban Task #6: Adding Image Uploads to our App
+## **Kanban Task #6: Adding Image Uploads to our App**
 
 ## Task: Adding the File Input Button
 
@@ -717,3 +727,10 @@ addPost(postTitle: string, msg: string) {
 - Build the validator
 - Attach validator to form - only images - no save yet
 - Add to form image control if type is image - no save yet
+
+## Task: Adding Server Side Upload
+
+- Run ```npm install multer --save``` Allows the storage of files on the server
+- Add: multar to ```route.post("",(req, res, next)) => {...}```
+
+## Task:  Uploading Files
