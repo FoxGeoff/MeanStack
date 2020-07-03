@@ -709,3 +709,5 @@ addPost(postTitle: string, msg: string) {
 ## Task: Adding Image Controls to Store the Image
 
 ## Task: Adding an Image Preview
+
+## Task: Starting with the Mime-Type Validator
