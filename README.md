@@ -705,3 +705,5 @@ addPost(postTitle: string, msg: string) {
 - Add Button and input type="file"
 
 ## Task: Converting the Form from a Template Driven to a Reactive
+
+## Task: Adding Image Controls to Store the Image

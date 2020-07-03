@@ -27,7 +27,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       }),
       message: new FormControl(null, {
         validators: [Validators.required]
-      })
+      }),
+      image: new FormControl(null, {validators: Validators.required})
     });
 
     this.post = new Post();
@@ -54,7 +55,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
               console.log(`From server Message: ${postData.msg}`);
               this.form.setValue({
                 title: this.post.title,
-                message: this.post.message
+                message: this.post.message,
+                image: null
               });
             });
         } else {
@@ -66,6 +68,16 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void { }
 
+  /* Event is a built in JavaScript even  */
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    /* image control in not an actual control on the form, file JS obj */
+    this.form.patchValue({image: file});
+    this.form.get('image').updateValueAndValidity();
+    console.log(file);
+    console.log(this.form);
+  }
+//
   /* renamed from onAddPost(form:NgForm) */
   onSavePost() {
     if (this.form.invalid) {
