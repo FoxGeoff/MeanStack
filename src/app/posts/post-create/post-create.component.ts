@@ -4,6 +4,7 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostsService } from 'src/app/service/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from 'src/app/models/post';
+import { mimeType } from './mime-type.validator';
 
 @Component({
   selector: 'app-post-create',
@@ -29,7 +30,10 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       message: new FormControl(null, {
         validators: [Validators.required]
       }),
-      image: new FormControl(null, { validators: Validators.required })
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
     });
 
     this.post = new Post();
@@ -89,7 +93,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
     };
     reader.readAsDataURL(file);
   }
-  //
+
   /* renamed from onAddPost(form:NgForm) */
   onSavePost() {
     if (this.form.invalid) {
@@ -108,6 +112,5 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
     }
     console.log(`onSave(form): Title: ${this.form.value.title} Message: ${this.form.value.message}`);
     this.form.reset();
-
   }
 }

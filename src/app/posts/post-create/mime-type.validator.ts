@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 // import { AbstractControl } from '@angular/forms';
 
 /* Promise is a generic type: JS obj => {} AND dynamic prop type read as string => [key: string] AND of type => :any */
-export const mineType = (control: AbstractControl): Promise<{ [key: string]: any }> | Observable<{ [key: string]: any }> => {
+export const mimeType = (control: AbstractControl): Promise<{ [key: string]: any }> | Observable<{ [key: string]: any }> => {
   const file = control.value as File;
   const fileReader = new FileReader();
   const fileReader$ = Observable.create((observer: Observer<{ [key: string]: any }>) => {
@@ -19,7 +19,7 @@ export const mineType = (control: AbstractControl): Promise<{ [key: string]: any
         header += arr[i].toString(16);
       }
       /* we are checking image file types */
-      switch (header {
+      switch (header) {
         case '89504e47':
           isValid = true;
           break;

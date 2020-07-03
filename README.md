@@ -715,3 +715,4 @@ addPost(postTitle: string, msg: string) {
 ## Task: Finishing the Image Validator
 
 - Build the validator
+- attach validator (5.03)
