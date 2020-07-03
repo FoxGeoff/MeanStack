@@ -710,4 +710,8 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Adding an Image Preview
 
-## Task: Starting with the Mime-Type Validator
+## Task: Starting with the Mime-Type Validator (wip)
+
+## Task: Finishing the Image Validator
+
+- Build the validator
