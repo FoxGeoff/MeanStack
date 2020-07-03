@@ -733,4 +733,4 @@ addPost(postTitle: string, msg: string) {
 - Run ```npm install multer --save``` Allows the storage of files on the server
 - Add: multar to ```route.post("",(req, res, next)) => {...}```
 
-## Task:  Uploading Files
+## Task: Uploading Files
