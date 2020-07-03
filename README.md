@@ -715,4 +715,5 @@ addPost(postTitle: string, msg: string) {
 ## Task: Finishing the Image Validator
 
 - Build the validator
-- attach validator (5.03)
+- Attach validator to form - only images - no save yet
+- Add to form image control if type is image - no save yet
