@@ -102,7 +102,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     if (this.mode === 'create') {
       /* Replaced this.postCreated.emit(post); by the postService.addPost(post) */
-      this.postService.addPost(this.form.value.title, this.form.value.message);
+      this.postService.addPost(this.form.value.title, this.form.value.message, this.form.value.image);
     } else {
       this.postService.updatePost(
         this.postId,

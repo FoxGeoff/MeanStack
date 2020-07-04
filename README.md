@@ -734,3 +734,5 @@ addPost(postTitle: string, msg: string) {
 - Add: multar to ```route.post("",(req, res, next)) => {...}```
 
 ## Task: Uploading Files
+
+- Angular front-end code

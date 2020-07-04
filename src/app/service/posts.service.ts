@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { title } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +54,31 @@ export class PostsService {
     return this.postsUpdate$.asObservable();
   }
 
-  addPost(postTitle: string, postMessage: string) {
-    const post: Post = { id: null, title: postTitle, message: postMessage };
-    this.http.post<{ msg: string, postId: string }>('http://localhost:3000/api/posts', post)
+  /* With "post" with file image post update format (FormData format) */
+  addPost(postTitle: string, postMessage: string, image: File) {
+    const postData = new FormData();
+    postData.append('title', postTitle);
+    postData.append('message', postMessage);
+    postData.append('image', image, title);
+
+    this.http
+      .post<{ msg: string, postId: string }>(
+        'http://localhost:3000/api/posts',
+        postData // auto handles non JSON data headers
+      )
       .subscribe((responData) => {
-        console.log(responData.msg + '::' + responData.postId);
+        const post: Post = { id: responData.postId, title: postTitle, message: postMessage };
+        this.posts.push(post);
+        this.postsUpdate$.next([...this.posts]);
+        this.router.navigate(['/']);
+      });
+  }
+
+  /* No file image post update (JSON format) */
+  addPostOld(postTitle: string, postMessage: string) {
+    const post: Post = { id: null, title: postTitle, message: postMessage };
+    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/posts', post)
+      .subscribe((responData) => {
         const id = responData.postId;
         post.id = id;
         this.posts.push(post);

@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
       error = null;
     }
     /* Path relative to server.js */
-    cb(error, "backend/images");
+    cb(error, "../backend/images");
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(" ").join("-");
@@ -27,12 +27,12 @@ const storage = multer.diskStorage({
   },
 });
 
-router.post("", multer(storage).single("image"), (req, res, next) => {
+router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
   const post = new Post({
     title: req.body.title,
     message: req.body.message,
   });
-  console.log(post);
+  console.log('From Server- from router.post: ' + post);
   // generates query to DB
   post.save().then((createPost) => {
     res.status(201).json({
@@ -54,7 +54,7 @@ router.put("/:id", (req, res, next) => {
   /* Using Mongoose model: post1: Post */
   var query = { _id: req.params.id };
   Post.findOneAndUpdate(query, updatedPost).then((result) => {
-    console.log(result);
+    console.log("From Server- router.put" + result);
     res.status(200).json({ msg: "Post updated successfully!" });
   });
 });
@@ -62,7 +62,7 @@ router.put("/:id", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   Post.findById({ _id: req.params.id }).then((result) => {
     if (result) {
-      console.log("From Server" + result);
+      console.log("From Server- router.get(ONE)" + result);
       res.status(200).json({
         msg: "Post fetched successfully!",
         post: result,
@@ -78,7 +78,7 @@ router.get("/:id", (req, res, next) => {
 router.get("", (req, res, next) => {
   //mongoose
   Post.find().then((result) => {
-    console.log(result);
+    console.log("From Server- router.get(ALL)" + result);
     res.status(200).json({
       msg: "Posts fetched successfully!",
       posts: result,
