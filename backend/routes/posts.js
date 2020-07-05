@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const Post = require("../models/post");
+const { createShorthandPropertyAssignment } = require("typescript");
 
 const router = express.Router();
 
@@ -31,16 +32,24 @@ const storage = multer.diskStorage({
 });
 
 router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
+  const url = req.protocol + "://" + req.get("host");
   const post = new Post({
     title: req.body.title,
     message: req.body.message,
+    imagePath: `${url}/images/${req.file.filename}`
   });
   console.log('From Server- from router.post: ' + post);
   // generates query to DB
   post.save().then((createPost) => {
     res.status(201).json({
       msg: "Post added sucessfully",
-      postId: createPost._id,
+      Post: {
+        id: createPost._id,
+        title: createPost.title,
+        message: createPost.message,
+        imagePath: createPost.imagePath
+      }
+      /* modern Syntax: Post: {}...createdPost, id: createdPost._id}  */
     });
   });
 });

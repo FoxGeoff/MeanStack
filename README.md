@@ -737,4 +737,10 @@ addPost(postTitle: string, msg: string) {
 
 - Angular front-end code
 
+## Task: Working with the File URL
+
+## Task: Fetching Images on the Frontend
+
+- add to Post imagePath
+
 ## Task: Reflecting the Token Expiration in the UI

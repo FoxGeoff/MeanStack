@@ -29,7 +29,8 @@ export class PostsService {
           return {
             title: post.title,
             message: post.message,
-            id: post._id
+            id: post._id,
+            imageData: post.imagePath
           };
         });
       }))
@@ -62,12 +63,17 @@ export class PostsService {
     postData.append('image', image, title);
 
     this.http
-      .post<{ msg: string, postId: string }>(
+      .post<{ msg: string, post: Post }>(
         'http://localhost:3000/api/posts',
         postData // auto handles non JSON data headers
       )
       .subscribe((responData) => {
-        const post: Post = { id: responData.postId, title: postTitle, message: postMessage };
+        const post: Post = {
+          id: responData.post.id,
+          title: postTitle,
+          message: postMessage,
+          imagePath: responData.post.imagePath
+        };
         this.posts.push(post);
         this.postsUpdate$.next([...this.posts]);
         this.router.navigate(['/']);
@@ -76,7 +82,7 @@ export class PostsService {
 
   /* No file image post update (JSON format) */
   addPostOld(postTitle: string, postMessage: string) {
-    const post: Post = { id: null, title: postTitle, message: postMessage };
+    const post: Post = { id: null, title: postTitle, message: postMessage, imagePath: null };
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/posts', post)
       .subscribe((responData) => {
         const id = responData.postId;
@@ -90,7 +96,7 @@ export class PostsService {
 
   /* used for the edit form */
   updatePost(postId: string, postTitle: string, postMessage: string) {
-    const newPost: Post = { id: postId, title: postTitle, message: postMessage };
+    const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
     this.http
       .put(`http://localhost:3000/api/posts/${postId}`, newPost)
       .subscribe(response => {
