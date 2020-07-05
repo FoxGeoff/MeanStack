@@ -30,7 +30,7 @@ export class PostsService {
             title: post.title,
             message: post.message,
             id: post._id,
-            imageData: post.imagePath
+            imagePath: post.imagePath
           };
         });
       }))

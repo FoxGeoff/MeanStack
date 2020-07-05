@@ -15,3 +15,13 @@
 mat-spinner {
   margin: auto;
 }
+
+.post-image {
+  width: 100%;
+  border: orangered;
+  border-style: groove;
+}
+
+.post-image img {
+  width: 100%;
+}

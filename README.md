@@ -742,5 +742,6 @@ addPost(postTitle: string, msg: string) {
 ## Task: Fetching Images on the Frontend
 
 - add to Post imagePath
+- display image
 
 ## Task: Reflecting the Token Expiration in the UI
