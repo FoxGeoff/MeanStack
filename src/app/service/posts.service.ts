@@ -60,7 +60,7 @@ export class PostsService {
     const postData = new FormData();
     postData.append('title', postTitle);
     postData.append('message', postMessage);
-    postData.append('image', image, title);
+    postData.append('image', image);
 
     this.http
       .post<{ msg: string, post: Post }>(
