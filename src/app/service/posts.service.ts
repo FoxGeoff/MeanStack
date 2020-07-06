@@ -61,10 +61,10 @@ export class PostsService {
     const postData = new FormData();
     postData.append('title', postTitle);
     postData.append('message', postMessage);
-    postData.append('image', image, postTitle);
+    postData.append('image', image, postTitle); // file, file name
 
     this.http
-      .post<{ msg: string, postId: string,  imagePath: string}>(
+      .post<{ msg: string, postId: string, imagePath: string }>(
         'http://localhost:3000/api/posts',
         postData // auto handles non JSON data headers
       )
@@ -96,8 +96,14 @@ export class PostsService {
   }
 
   /* used for the edit form */
-  updatePost(postId: string, postTitle: string, postMessage: string) {
-    const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
+  updatePost(postId: string, postTitle: string, postMessage: string, image: File | string) {
+
+    // const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
+    if (typeof(image) === 'object') {
+        // use frm data
+    } else {
+        // use json
+    }
     this.http
       .put(`http://localhost:3000/api/posts/${postId}`, newPost)
       .subscribe(response => {

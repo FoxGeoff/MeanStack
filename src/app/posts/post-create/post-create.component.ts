@@ -56,7 +56,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
                 id: postData.post._id,
                 title: postData.post.title,
                 message: postData.post.message,
-                imagePath: null
+                imagePath: postData.post.imagePath
               };
               console.log(`From server Message: ${postData.msg}`);
               this.form.setValue({
@@ -108,7 +108,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       this.postService.updatePost(
         this.postId,
         this.form.value.title,
-        this.form.value.message
+        this.form.value.message,
+        this.form.value.image
       );
     }
     console.log(`onSave(form): Title: ${this.form.value.title} Message: ${this.form.value.message}`);
