@@ -57,22 +57,23 @@ export class PostsService {
 
   /* With "post" with file image post update format (FormData format) */
   addPost(postTitle: string, postMessage: string, image: File) {
+    /* allows text and blob values */
     const postData = new FormData();
     postData.append('title', postTitle);
     postData.append('message', postMessage);
-    postData.append('image', image);
+    postData.append('image', image, postTitle);
 
     this.http
-      .post<{ msg: string, post: Post }>(
+      .post<{ msg: string, postId: string,  imagePath: string}>(
         'http://localhost:3000/api/posts',
         postData // auto handles non JSON data headers
       )
-      .subscribe((responData) => {
+      .subscribe((responseData) => {
         const post: Post = {
-          id: responData.post.id,
+          id: responseData.postId,
           title: postTitle,
           message: postMessage,
-          imagePath: responData.post.imagePath
+          imagePath: responseData.imagePath
         };
         this.posts.push(post);
         this.postsUpdate$.next([...this.posts]);
@@ -84,8 +85,8 @@ export class PostsService {
   addPostOld(postTitle: string, postMessage: string) {
     const post: Post = { id: null, title: postTitle, message: postMessage, imagePath: null };
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/posts', post)
-      .subscribe((responData) => {
-        const id = responData.postId;
+      .subscribe((responseData) => {
+        const id = responseData.postId;
         post.id = id;
         this.posts.push(post);
         this.postsUpdate$.next([...this.posts]);
