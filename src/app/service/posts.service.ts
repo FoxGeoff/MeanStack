@@ -98,7 +98,7 @@ export class PostsService {
   /* used for the edit form */
   updatePost(postId: string, postTitle: string, postMessage: string, image: File | string) {
 
-    // const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
+    const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
     if (typeof(image) === 'object') {
         // use frm data
     } else {

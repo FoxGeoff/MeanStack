@@ -744,7 +744,7 @@ addPost(postTitle: string, msg: string) {
 - add to Post imagePath
 - display image
 
-## Task: Updating Posts with Images << here >>
+## Task: Updating Posts with Images << here  @ 3:40>>
 
 ## **Kanban Task #7:  Adding Pagination
 
