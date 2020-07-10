@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { title } from 'process';
+import { PostCreateComponent } from '../posts/post-create/post-create.component';
 
 @Injectable({
   providedIn: 'root'
@@ -97,26 +98,37 @@ export class PostsService {
 
   /* used for the edit form */
   updatePost(postId: string, postTitle: string, postMessage: string, image: File | string) {
+    // tslint:disable-next-line: prefer-const
+    // tslint:disable-next-line: one-variable-per-declaration
+    let postData: Post | FormData;
 
-    const newPost: Post = { id: postId, title: postTitle, message: postMessage, imagePath: null };
-    if (typeof(image) === 'object') {
-        // use frm data
+    if (typeof (image) === 'object') {
+      postData = new FormData();
+      postData.append('title', postTitle);
+      postData.append('message', postMessage);
+      postData.append('image', image, postTitle);
     } else {
-        // use json
+      postData = { id: postId, title: postTitle, message: postMessage, imagePath: null };
     }
     this.http
-      .put(`http://localhost:3000/api/posts/${postId}`, newPost)
+      .put(`http://localhost:3000/api/posts/${postId}`, postData)
       .subscribe(response => {
         /* Now update the local array, this.posts with the newPost - BUT NOW:
           Note: If we never vist our posts list page then there is nothing in the array
           and updatedPosts is empty - so this will fail!
         */
         const updatedPosts = [...this.posts];
-        const postIndex = updatedPosts.findIndex(p => p.id === newPost.id);
+        const postIndex = updatedPosts.findIndex(p => p.id === postId);
+        const newPost: Post = {
+          id: postId,
+          title: postTitle,
+          message: postMessage,
+          imagePath: response.imagePath // TODO: WIP
+        };
+
         updatedPosts[postIndex] = newPost;
         this.posts = updatedPosts;
         this.postsUpdate$.next([...this.posts]);
-        /*TODO: Refactor to method. Redirect back to post-list page when done */
         this.router.navigate(['/']);
       });
   }
