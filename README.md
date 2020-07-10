@@ -746,6 +746,6 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Updating Posts with Images << here  @ 3:40>>
 
-## **Kanban Task #7:  Adding Pagination
+## **Kanban Task #7:  Adding Pagination**
 
 ## Task: Reflecting the Token Expiration in the UI
