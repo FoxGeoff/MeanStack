@@ -22,7 +22,6 @@ const storage = multer.diskStorage({
     cb(error, "backend/images");
   },
   filename: (req, file, cb) => {
-
     console.log("file name: " + file.originalname);
 
     const name = file.originalname.toLowerCase().split(" ").join("-");
@@ -31,45 +30,56 @@ const storage = multer.diskStorage({
   },
 });
 
-router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
-  const url = req.protocol + "://" + req.get("host");
-  const post = new Post({
-    title: req.body.title,
-    message: req.body.message,
-    imagePath: `${url}/images/${req.file.filename}`
-  });
-  console.log('From Server- from router.post: ' + post);
-  // generates query to DB
-  post.save().then((createPost) => {
-    res.status(201).json({
-      msg: "Post added sucessfully",
-      Post: {
-        id: createPost._id,
-        title: createPost.title,
-        message: createPost.message,
-        imagePath: createPost.imagePath
-      }
-      /* modern Syntax: Post: {}...createdPost, id: createdPost._id}  */
+router.post(
+  "",
+  multer({ storage: storage }).single("image"),
+  (req, res, next) => {
+    const url = req.protocol + "://" + req.get("host");
+    const post = new Post({
+      title: req.body.title,
+      message: req.body.message,
+      imagePath: `${url}/images/${req.file.filename}`,
     });
-  });
-});
+    console.log("From Server- from router.post: " + post);
+    // generates query to DB
+    post.save().then((createPost) => {
+      res.status(201).json({
+        msg: "Post added sucessfully",
+        Post: {
+          id: createPost._id,
+          title: createPost.title,
+          message: createPost.message,
+          imagePath: createPost.imagePath,
+        },
+        /* modern Syntax: Post: {}...createdPost, id: createdPost._id}  */
+      });
+    });
+  }
+);
 
 /* findOneAndUpdate, updateOne */
 /* Could be PUT or PATCH */
 /* used for the edit form */
-router.put("/:id", (req, res, next) => {
-  const updatedPost = new Post({
-    _id: req.body.id,
-    title: req.body.title,
-    message: req.body.message,
-  });
-  /* Using Mongoose model: post1: Post */
-  var query = { _id: req.params.id };
-  Post.findOneAndUpdate(query, updatedPost).then((result) => {
-    console.log("From Server- router.put" + result);
-    res.status(200).json({ msg: "Post updated successfully!" });
-  });
-});
+router.put(
+  "/:id",
+  multer({ storage: storage }).single("image"),
+  (req, res, next) => {
+
+    console.log(req.file); // debug check if file is string or object
+
+    const updatedPost = new Post({
+      _id: req.body.id,
+      title: req.body.title,
+      message: req.body.message,
+    });
+    /* Using Mongoose model: post1: Post */
+    var query = { _id: req.params.id };
+    Post.findOneAndUpdate(query, updatedPost).then((result) => {
+      console.log("From Server- router.put" + result);
+      res.status(200).json({ msg: "Post updated successfully!" });
+    });
+  }
+);
 
 router.get("/:id", (req, res, next) => {
   Post.findById({ _id: req.params.id }).then((result) => {

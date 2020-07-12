@@ -108,7 +108,12 @@ export class PostsService {
       postData.append('message', postMessage);
       postData.append('image', image, postTitle);
     } else {
-      postData = { id: postId, title: postTitle, message: postMessage, imagePath: null };
+      postData = {
+        id: postId,
+        title: postTitle,
+        message: postMessage,
+        imagePath: image
+      };
     }
     this.http
       .put(`http://localhost:3000/api/posts/${postId}`, postData)
@@ -123,7 +128,7 @@ export class PostsService {
           id: postId,
           title: postTitle,
           message: postMessage,
-          imagePath: response.imagePath // TODO: WIP
+          imagePath: '' // TODO: WIP - response.imagePath
         };
 
         updatedPosts[postIndex] = newPost;

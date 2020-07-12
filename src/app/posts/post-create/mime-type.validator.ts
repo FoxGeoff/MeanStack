@@ -1,12 +1,18 @@
 import { AbstractControl } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 // import { AbstractControl } from '@angular/forms';
 
 /* Promise is a generic type: JS obj => {} AND dynamic prop type read as string => [key: string] AND of type => :any */
 export const mimeType = (control: AbstractControl): Promise<{ [key: string]: any }> | Observable<{ [key: string]: any }> => {
+
+  if (typeof(control.value) === 'string') {
+    return of(null); // emit observable data immediatly
+  }
+
   const file = control.value as File;
   const fileReader = new FileReader();
-  const fileReader$ = Observable.create((observer: Observer<{ [key: string]: any }>) => {
+  const fileReader$ = new Observable(
+    (observer: Observer<{ [key: string]: any }>) => {
     /* sync version fileReader.onloadEnd() */
     fileReader.addEventListener('loadend', () => {
       /* read the binary blob and extract the meme type */
