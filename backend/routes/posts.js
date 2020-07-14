@@ -68,23 +68,25 @@ router.put(
     console.log(`Image file is (from server router.put): ${req.file}`);
 
     /*Default - We have a file path */
-    let imagePath = req.body.imagePath;                         // new
+    let imagePath = req.body.imagePath;
 
-    if (req.file) {                                             // new
+    if (req.file) {
       /* We have a file object*/
-      const url = req.protocol + "://" + req.get("host");       // new
-      imagePath = `${url}/images/${req.file.filename}`;         // new
-    }                                                           // new
+      const url = req.protocol + "://" + req.get("host");
+      imagePath = `${url}/images/${req.file.filename}`;
+    }
 
     const updatedPost = new Post({
       _id: req.body.id,
       title: req.body.title,
       message: req.body.message,
-      imagePath: imagePath, // new
+      imagePath: imagePath,
     });
 
     /* Debug -   */
-    console.log(post);
+    console.log(
+      `Image updated file is (from server router.put): ${updatedPost}`
+    );
 
     /* Using Mongoose model: post1: Post */
     var query = { _id: req.params.id };
