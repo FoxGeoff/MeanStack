@@ -36,7 +36,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       })
     });
 
-    this.post = new Post();
+    this.post = new Post(); //
     /* built-in Observable - no need to unsubscribe */
     this.route.paramMap
       .subscribe((paramMap: ParamMap) => {
@@ -62,7 +62,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
               this.form.setValue({
                 title: this.post.title,
                 message: this.post.message,
-                image: null
+                image: postData.post.imagePath //new
               });
             });
         } else {
@@ -97,8 +97,9 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
 
   /* renamed from onAddPost(form:NgForm) */
   onSavePost() {
+
     if (this.form.invalid) {
-      console.log(`onSave(form) is invalid`);
+      console.log(`onSave(form) is invalid ${this.form.value.image}`);
       return;
     }
 
@@ -107,7 +108,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       this.postService.addPost(
         this.form.value.title,
         this.form.value.message,
-        this.form.value.image);
+        this.form.value.image
+        );
     } else {
       this.postService.updatePost(
         this.postId,

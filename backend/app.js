@@ -1,5 +1,8 @@
-// npm install express --save
-// this is the express framework app
+/* npm install express --save
+   this is the express framework app
+*/
+
+/* Allows to construct paths to files */
 const path =  require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -20,6 +23,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+/* Allows access to these files. Requires const path */
 app.use("/images", express.static(path.join("backend/images")));
 
 app.use((req, res, next) => {

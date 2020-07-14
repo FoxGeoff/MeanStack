@@ -101,12 +101,14 @@ export class PostsService {
     // tslint:disable-next-line: prefer-const
     // tslint:disable-next-line: one-variable-per-declaration
     let postData: Post | FormData;
-
+    /* FormData - image is object  */
     if (typeof (image) === 'object') {
       postData = new FormData();
+      postData.append('id', postId); // new
       postData.append('title', postTitle);
       postData.append('message', postMessage);
       postData.append('image', image, postTitle);
+      /* JSON - image is string path  */
     } else {
       postData = {
         id: postId,

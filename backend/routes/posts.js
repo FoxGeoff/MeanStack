@@ -64,14 +64,28 @@ router.put(
   "/:id",
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
+    /* debug check - if file is string or object */
+    console.log(`Image file is (from server router.put): ${req.file}`);
 
-    console.log(req.file); // debug check if file is string or object
+    /*Default - We have a file path */
+    let imagePath = req.body.imagePath;                         // new
+
+    if (req.file) {                                             // new
+      /* We have a file object*/
+      const url = req.protocol + "://" + req.get("host");       // new
+      imagePath = `${url}/images/${req.file.filename}`;         // new
+    }                                                           // new
 
     const updatedPost = new Post({
       _id: req.body.id,
       title: req.body.title,
       message: req.body.message,
+      imagePath: imagePath, // new
     });
+
+    /* Debug -   */
+    console.log(post);
+
     /* Using Mongoose model: post1: Post */
     var query = { _id: req.params.id };
     Post.findOneAndUpdate(query, updatedPost).then((result) => {
