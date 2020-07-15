@@ -754,4 +754,6 @@ addPost(postTitle: string, msg: string) {
 
 - Using ?pagesize=2&page=1 ```console.log(req.query);```  returns: ```{ pagesize: '2', page: '1' }```
 
+## Task: Connecting the Angular Paginator to the Backend
+
 ## Task: Reflecting the Token Expiration in the UI

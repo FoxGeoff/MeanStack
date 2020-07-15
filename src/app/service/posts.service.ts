@@ -16,15 +16,16 @@ export class PostsService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getPosts() {
+  getPosts(postsPerPage: number, currentPage: number) {
     /* using a array copy, is best practice
     *  but it can create an issue
-    *  Fix be using an event driven approach with rxjs
+    *  Fix by using an event driven approach with rxjs
     */
 
+    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     /* on destroy not required here bcause it is built into the api. */
     this.http
-      .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts')
+      .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts' + queryParams)
       .pipe(map((postData) => {
         return postData.posts.map(post => {
           return {
