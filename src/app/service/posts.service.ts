@@ -12,7 +12,7 @@ import { PostCreateComponent } from '../posts/post-create/post-create.component'
 })
 export class PostsService {
   private posts: Post[] = [];
-  private postsUpdate$ = new Subject<Post[]>();
+  private postsUpdate$ = new Subject<{ posts: Post[], postCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,20 +25,28 @@ export class PostsService {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     /* on destroy not required here bcause it is built into the api. */
     this.http
-      .get<{ msg: string, posts: any }>('http://localhost:3000/api/posts' + queryParams)
-      .pipe(map((postData) => {
-        return postData.posts.map(post => {
+      .get<{ maxPosts: number, msg: string, posts: any }>('http://localhost:3000/api/posts' + queryParams)
+      .pipe(
+        map((postData) => {
           return {
-            title: post.title,
-            message: post.message,
-            id: post._id,
-            imagePath: post.imagePath
+            posts: postData.posts.map(post => {
+              return {
+                title: post.title,
+                message: post.message,
+                id: post._id,
+                imagePath: post.imagePath
+              };
+            }),
+            maxPosts: postData.maxPosts
           };
+        })
+      )
+      .subscribe((transformedPostsData) => {
+        this.posts = transformedPostsData.posts;
+        this.postsUpdate$.next({
+          posts: [...this.posts],
+          postCount: transformedPostsData.maxPosts
         });
-      }))
-      .subscribe((transformedPosts) => {
-        this.posts = transformedPosts;
-        this.postsUpdate$.next([...this.posts]);
       });
   }
 

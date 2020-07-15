@@ -756,4 +756,6 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Connecting the Angular Paginator to the Backend
 
+## Task: Fetching Posts Correctly
+
 ## Task: Reflecting the Token Expiration in the UI
