@@ -114,8 +114,17 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  //mongoose
-  Post.find().then((result) => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Post.find();
+  /* debug: query params for pagination say - ?pagesize=2&page=1 */
+  console.log(req.query);
+  if (pageSize && currentPage) {
+    //mongoose query (not effective for a lage data set)
+    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  }
+  //mongoose query
+  postQuery.then((result) => {
     console.log("From Server- router.get(ALL)" + result);
     res.status(200).json({
       msg: "Posts fetched successfully!",

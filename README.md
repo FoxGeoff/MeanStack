@@ -748,4 +748,10 @@ addPost(postTitle: string, msg: string) {
 
 ## **Kanban Task #7:  Adding Pagination**
 
+## Task: Adding the Pagination Component
+
+## Task: Working on the Pagination Backend
+
+- Using ?pagesize=2&page=1 ```console.log(req.query);```  returns: ```{ pagesize: '2', page: '1' }```
+
 ## Task: Reflecting the Token Expiration in the UI
