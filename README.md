@@ -758,4 +758,6 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Fetching Posts Correctly
 
+## Task:  Finishing Touches
+
 ## Task: Reflecting the Token Expiration in the UI

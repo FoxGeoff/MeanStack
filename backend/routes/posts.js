@@ -130,7 +130,7 @@ router.get("", (req, res, next) => {
     return Post.count();
   })
   .then(count => {
-    console.log("From Server- router.get(ALL)" + result);
+    console.log("From Server- router.get(ALL)" + fetchedPost);
     res.status(200).json({
       msg: "Posts fetched successfully!",
       posts: fetchedPost,
