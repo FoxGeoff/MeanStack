@@ -764,6 +764,6 @@ addPost(postTitle: string, msg: string) {
 
 ## Task:Adding the Login Input Fields
 
-- Code up the login and signup forms
+- Code up the login and signup forms and add routing
 
 ## Task: Reflecting the Token Expiration in the UI
