@@ -758,6 +758,10 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Fetching Posts Correctly
 
-## Task:  Finishing Touches
+## Task: Finishing Touches
+
+## **Kanban Task #8: Adding User Authentication**
+
+## Task:Adding the Login Input Fields
 
 ## Task: Reflecting the Token Expiration in the UI
