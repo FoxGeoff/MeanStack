@@ -17,3 +17,7 @@
  .mat-accent {
    color: palevioletred;
  }
+
+ ul {
+   display: flex;
+ }
