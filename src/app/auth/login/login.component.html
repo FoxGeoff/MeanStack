@@ -1,9 +1,11 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <section class="signup" fxLayoutAlign="center center">
   <form
     fxLayoutGap="10px"
     fxLayout="column"
     [formGroup]="loginForm"
     (ngSubmit)="onSubmit()"
+    *ngIf="!isLoading"
   >
     <mat-form-field>
       <input

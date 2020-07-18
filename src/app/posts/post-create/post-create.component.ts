@@ -62,7 +62,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
               this.form.setValue({
                 title: this.post.title,
                 message: this.post.message,
-                image: postData.post.imagePath //new
+                image: postData.post.imagePath
               });
             });
         } else {

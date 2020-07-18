@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  isLoading = false;
   loginForm: FormGroup;
   email: FormControl;
   password: FormControl;
@@ -35,12 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.authService.login({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     });
     console.log(this.loginForm);
     console.log('Saved: ' + JSON.stringify(this.loginForm.value));
+    this.isLoading = false;
   }
-
 }
