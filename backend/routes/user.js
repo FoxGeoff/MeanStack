@@ -1,9 +1,8 @@
 const express = require("express");
+const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
-const router = require("./posts");
-
-router.post("/signup");
+const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
   bcrypt
@@ -25,6 +24,10 @@ router.post("/signup", (req, res, next) => {
         error: err,
       });
     });
+});
+
+router.post("/login", (req, res, next) => {
+
 });
 
 module.exports = router;
