@@ -772,4 +772,11 @@ addPost(postTitle: string, msg: string) {
 - Run ```npm install mongoose-unique-validator --save```
 - because 'unique' is only used for DB optimization
 
+## Task: Creating a New User Upon Request
+
+- Run ```npm install bcrypt --save```
+- to encript the password
+
+## Task: Connecting Angular to the Backend
+
 ## Task: Reflecting the Token Expiration in the UI
