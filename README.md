@@ -769,4 +769,7 @@ addPost(postTitle: string, msg: string) {
 
 ## Task: Creating the User Model
 
+- Run ```npm install mongoose-unique-validator --save```
+- because 'unique' is only used for DB optimization
+
 ## Task: Reflecting the Token Expiration in the UI
