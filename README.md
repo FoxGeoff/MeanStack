@@ -777,6 +777,6 @@ addPost(postTitle: string, msg: string) {
 - Run ```npm install bcrypt --save```
 - to encript the password
 
-## Task: Connecting Angular to the Backend
+## Task: c
 
 ## Task: Reflecting the Token Expiration in the UI

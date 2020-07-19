@@ -1,15 +1,25 @@
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
+import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) { }
+
+  createUser(email: string, password: string) {
+    const authData: AuthData = {email, password};
+    this.http
+    .post('http://localhost:3000/api/user/signup', authData)
+    .subscribe(response => {
+      console.log(response);
+    });
+  }
 
   registerUser(authData: AuthData) {
     this.user = {
@@ -38,7 +48,7 @@ export class AuthService {
   }
 
   getUser() {
-    return {...this.user};
+    return { ...this.user };
   }
 
   isAuth() {
