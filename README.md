@@ -778,6 +778,6 @@ addPost(postTitle: string, msg: string) {
 - to encript the password
 - JWT Run ```npm install jsonwebtoken --save``` (6:20)
 
-## Task: c
+## Task: next
 
 ## Task: Reflecting the Token Expiration in the UI
