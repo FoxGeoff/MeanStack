@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uniqueValidator = required("mongoose-unique-validator");
+const uniqueValidator = require("mongoose-unique-validator");
 
 //note "String is a class used in node/mongoDB"
 const userSchema = mongoose.Schema({

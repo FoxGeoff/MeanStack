@@ -776,6 +776,7 @@ addPost(postTitle: string, msg: string) {
 
 - Run ```npm install bcrypt --save```
 - to encript the password
+- JWT Run ```npm install jsonwebtoken --save``` (6:20)
 
 ## Task: c
 
