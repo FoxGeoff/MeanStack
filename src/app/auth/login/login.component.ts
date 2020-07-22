@@ -22,9 +22,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = new FormGroup({
       email: new FormControl('', {
-        validators: [Validators.required, Validators.email] }),
+        validators: [Validators.required, Validators.email]
+      }),
       password: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(6)] })
+        validators: [Validators.required, Validators.minLength(6)]
+      })
     });
   }
 
@@ -34,14 +36,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /* MeanStack Method */
   onSubmit() {
     this.isLoading = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     this.authService.login({
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     });
     console.log(this.loginForm);
     console.log('Saved: ' + JSON.stringify(this.loginForm.value));
+
     this.isLoading = false;
   }
 }

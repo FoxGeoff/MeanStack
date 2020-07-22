@@ -12,13 +12,23 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
+  /* MeanStack Mehod */
   createUser(email: string, password: string) {
-    const authData: AuthData = {email, password};
+    const authData: AuthData = { email, password };
     this.http
-    .post('http://localhost:3000/api/user/signup', authData)
-    .subscribe(response => {
-      console.log(response);
-    });
+      .post('http://localhost:3000/api/user/signup', authData)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+  loginUser(email: string, password: string) {
+    const authData: AuthData = { email, password };
+    this.http
+      .post('http://localhost:3000/api/user/login', authData)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
   registerUser(authData: AuthData) {
