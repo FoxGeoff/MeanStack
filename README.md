@@ -776,7 +776,23 @@ addPost(postTitle: string, msg: string) {
 
 - Run ```npm install bcrypt --save```
 - to encript the password
-- JWT Run ```npm install jsonwebtoken --save``` (6:20)
+- JWT Run ```npm install jsonwebtoken --save```
+
+- Working Check in browsr console:
+
+```json
+message: "Message from server: User created"
+​
+result: {…}
+​​
+__v: 0
+​​
+_id: "5f18d8129aec24488852356b"
+​​
+email: "test@test.com"
+​​
+password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
+```
 
 ## Task: Connecting Angular to the Backend
 
