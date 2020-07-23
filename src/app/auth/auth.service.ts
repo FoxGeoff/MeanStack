@@ -16,21 +16,23 @@ export class AuthService {
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http
-      .post('http://localhost:3000/api/user/signup', authData)
+      .post('http://localhost:3000/api/users/signup', authData)
       .subscribe(response => {
         console.log(response);
       });
   }
 
+  /* MeanStack Mehod */
   loginUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http
-      .post('http://localhost:3000/api/user/login', authData)
+      .post('http://localhost:3000/api/users/login', authData)
       .subscribe(response => {
         console.log(response);
       });
   }
 
+  /* my-fittness method */
   registerUser(authData: AuthData) {
     this.user = {
       email: authData.email,
@@ -40,6 +42,7 @@ export class AuthService {
     this.router.navigate(['/create']);
   }
 
+  /* my-fittness method */
   login(authData: AuthData) {
     this.user = {
       email: authData.email,
@@ -50,6 +53,7 @@ export class AuthService {
     console.log('login!');
   }
 
+  /* my-fittness method */
   logout() {
     this.user = null;
     this.authChange.next(false);
@@ -57,10 +61,12 @@ export class AuthService {
     console.log('logout!');
   }
 
+  /* my-fittness method */
   getUser() {
     return { ...this.user };
   }
 
+  /* my-fittness method */
   isAuth() {
     return this.user != null;
   }
