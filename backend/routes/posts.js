@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const Post = require("../models/post");
+const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ const storage = multer.diskStorage({
 
 router.post(
   "",
+  checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
@@ -61,6 +63,8 @@ router.post(
 /* used for the edit form */
 router.put(
   "/:id",
+  /* note we don't exe function - Express does */
+  checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     /* debug check - if file is string or object */
@@ -138,7 +142,7 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkAuth, (req, res, next) => {
   Post.deleteOne({ _id: req.params.id }).then((result) => {
     console.log(req.params.id);
     res.status(200).json({ msg: "Post deleted successfully!" });

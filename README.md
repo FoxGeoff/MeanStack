@@ -802,4 +802,9 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 
 ## Task: Sending the Token to the Frontend
 
+## Task: Adding Middleware to Protect Routes
+
+- Control on the server, protected routes
+- Check protected route: ``` status: 401, statusText: "Unauthorized", ```
+
 ## Task: Reflecting the Token Expiration in the UI
