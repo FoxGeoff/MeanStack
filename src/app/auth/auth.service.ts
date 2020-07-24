@@ -11,12 +11,18 @@ export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
   private token: string;
+  private authStatus$ = new Subject<boolean>();
 
   constructor(private router: Router, private http: HttpClient) { }
 
   /* MeanStack Mehod */
   getToken() {
     return this.token;
+  }
+
+  /* MeanStack Mehod */
+  getAuthStatus$() {
+    return this.authStatus$.asObservable();
   }
 
   /* MeanStack Mehod */
@@ -38,6 +44,8 @@ export class AuthService {
         console.log(`From auth-serviceloginUser: ${response}`);
         const token = response.token;
         this.token = token;
+
+        this.authStatus$.next(true);
       });
   }
 

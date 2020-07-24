@@ -811,4 +811,14 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 
 - auth-intercept
 
+```json
+{"Request Headers (747 B)":{"headers":[{"name":"Accept","value":"application/json, text/plain, */*"},{"name":"Accept-Encoding","value":"gzip, deflate"},{"name":"Accept-Language","value":"en-US,en;q=0.5"},{"name":"Authorization","value":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpZCI6IjVmMThkODEyOWFlYzI0NDg4ODUyMzU2YiIsImlhdCI6MTU5NTU2NzgwNCwiZXhwIjoxNTk1NTcxNDA0fQ.XPKuDNY7emIk0l7BPBeHRDwOCgnR8SRrW3CPmpr8G44"},{"name":"Cache-Control","value":"no-cache"},{"name":"Connection","value":"keep-alive"},{"name":"Content-Length","value":"28238"},{"name":"Content-Type","value":"multipart/form-data; boundary=---------------------------25906624877353347001114457755"},{"name":"DNT","value":"1"},{"name":"Host","value":"localhost:3000"},{"name":"Origin","value":"http://localhost:4200"},{"name":"Pragma","value":"no-cache"},{"name":"Referer","value":"http://localhost:4200/create"},{"name":"User-Agent","value":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0"}]}}
+```
+
+## Task: Improving the UI Header to Reflect the Authentication Status
+
+- Add header login/logout button visulization
+- Add hide/show for edit, delete dependent on authentication state
+- Add token in memory persistance local store or browser to survive browser reload
+
 ## Task: Reflecting the Token Expiration in the UI
