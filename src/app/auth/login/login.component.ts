@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   AuthSubscription() {
-    this.authSubscription = this.authService.authChange.subscribe(authStatus => {
+    this.authSubscription = this.authService.authChangeListener.subscribe(authStatus => {
       this.isAuth = authStatus;
     });
   }

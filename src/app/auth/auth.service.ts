@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { tokenName } from '@angular/compiler';
 @Injectable()
 export class AuthService {
-  authChange = new Subject<boolean>();
+  private isAuthenticated = false;
+  authChangeListener = new Subject<boolean>();
   private user: User;
   private token: string;
   private authStatus$ = new Subject<boolean>();
@@ -18,6 +19,11 @@ export class AuthService {
   /* MeanStack Mehod */
   getToken() {
     return this.token;
+  }
+
+  /* MeanStack Mehod */
+  getIsAuthenticated() {
+    return this.isAuthenticated;
   }
 
   /* MeanStack Mehod */
@@ -45,7 +51,11 @@ export class AuthService {
         const token = response.token;
         this.token = token;
 
-        this.authStatus$.next(true);
+        if (token) {
+          this.isAuthenticated = true;
+          this.authStatus$.next(true);
+        }
+
       });
   }
 
@@ -55,7 +65,7 @@ export class AuthService {
       email: authData.email,
       userId: Math.round(Math.random() * 1000).toString()
     };
-    this.authChange.next(true);
+    this.authChangeListener.next(true);
     this.router.navigate(['/create']);
   }
 
@@ -65,7 +75,7 @@ export class AuthService {
       email: authData.email,
       userId: Math.round(Math.random() * 1000).toString()
     };
-    this.authChange.next(true);
+    this.authChangeListener.next(true);
     this.router.navigate(['/create']);
     console.log('login!');
   }
@@ -73,7 +83,7 @@ export class AuthService {
   /* my-fittness method */
   logout() {
     this.user = null;
-    this.authChange.next(false);
+    this.authChangeListener.next(false);
     this.router.navigate(['/login']);
     console.log('logout!');
   }

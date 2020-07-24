@@ -818,7 +818,14 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Improving the UI Header to Reflect the Authentication Status
 
 - Add header login/logout button visulization
+
+## Task: Improving the UI Messages to Reflect the Authentication Status
+
 - Add hide/show for edit, delete dependent on authentication state
+- there is an issue with the list-post component and iaAuthenticated
+- FIX: (1) use a special Subject (Behaviour Subject - keeps the last state)
+- FIX (2) add property to the auth.service to keep state (private authStatusListener: bool) Used this one
+
 - Add token in memory persistance local store or browser to survive browser reload
 
 ## Task: Reflecting the Token Expiration in the UI
