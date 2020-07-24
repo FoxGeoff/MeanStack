@@ -831,7 +831,8 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 
 ***
 
-- FIX Add Logout button and add route guard
+- FIX Add Logout button
+- Add redirection
 
 - Add token in memory persistance local store or browser to survive browser reload
 

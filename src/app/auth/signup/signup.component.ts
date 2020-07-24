@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
   maxDate: Date;
+  islLoading = true;
 
   constructor(private authService: AuthService) { }
 
@@ -25,6 +26,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    this.islLoading = true;
     this.authService.createUser(
       form.value.email,
       form.value.password
