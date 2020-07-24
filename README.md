@@ -794,6 +794,12 @@ email: "test@test.com"
 password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ```
 
+-And if duplicate: ```message: Error, expected `email` to be unique. Value: `test@test.com```
+
 ## Task: Connecting Angular to the Backend
+
+## Task: Implementing SPA Authentication
+
+## Task: Sending the Token to the Frontend
 
 ## Task: Reflecting the Token Expiration in the UI

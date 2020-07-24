@@ -18,7 +18,7 @@ export class AuthService {
     this.http
       .post('http://localhost:3000/api/users/signup', authData)
       .subscribe(response => {
-        console.log(response);
+        console.log(`From auth-service createUser: ${response}`);
       });
   }
 
@@ -28,7 +28,7 @@ export class AuthService {
     this.http
       .post('http://localhost:3000/api/users/login', authData)
       .subscribe(response => {
-        console.log(response);
+        console.log(`From auth-serviceloginUser: ${response}`);
       });
   }
 

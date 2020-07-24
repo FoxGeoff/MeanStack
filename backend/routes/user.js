@@ -29,27 +29,35 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
+  /* required because user is only scoped to the first .then block */
+  let fetchedUser;
   User.findOne({ email: req.body.email })
-    .then((use) => {
+    .then((user) => {
       if (!user) {
         return res.status(401).json({
           message: "Message from server: Authentication failed!",
         });
       }
+      fetchedUser = user;
       return bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
       if (!result) {
+        /* return is used to return and escape exectution */
         return res.status(401).json({
           message: "Message from server: Authentication failed!",
         });
       }
       /* Success create JWT  */
       const token = jwt.sign(
-        { email: user.email, id: user._id },
+        { email: fetchedUser.email, id: fetchedUser._id },
         "secret_this_should_be_longer",
         { expiresIn: "1h" }
       );
+      /* this will return automatically no need for implicit return */
+      res.status(200).json({
+        token: token,
+      });
     })
     .catch((err) => {
       return res.status(401).json({
