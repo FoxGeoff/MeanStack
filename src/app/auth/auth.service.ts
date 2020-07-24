@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { HttpClient } from '@angular/common/http';
-import { tokenName } from '@angular/compiler';
+
 @Injectable()
 export class AuthService {
   private isAuthenticated = false;
@@ -57,6 +57,13 @@ export class AuthService {
         }
 
       });
+  }
+
+  /* MeanStack Mehod */
+  logoutUser() {
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatus$.next(false);
   }
 
   /* my-fittness method */

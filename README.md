@@ -822,9 +822,16 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Improving the UI Messages to Reflect the Authentication Status
 
 - Add hide/show for edit, delete dependent on authentication state
-- there is an issue with the list-post component and iaAuthenticated
+
+***
+
+- there is an issue with the list-post component and Authenticated
 - FIX: (1) use a special Subject (Behaviour Subject - keeps the last state)
 - FIX (2) add property to the auth.service to keep state (private authStatusListener: bool) Used this one
+
+***
+
+- FIX Add Logout button and add route guard
 
 - Add token in memory persistance local store or browser to survive browser reload
 
