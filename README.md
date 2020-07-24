@@ -807,4 +807,8 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 - Control on the server, protected routes
 - Check protected route: ``` status: 401, statusText: "Unauthorized", ```
 
+## Task: Adding the Token to Authenticate Requests
+
+- auth-intercept
+
 ## Task: Reflecting the Token Expiration in the UI

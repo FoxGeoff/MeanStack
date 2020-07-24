@@ -5,12 +5,19 @@ import { Router } from '@angular/router';
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { HttpClient } from '@angular/common/http';
+import { tokenName } from '@angular/compiler';
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
+  private token: string;
 
   constructor(private router: Router, private http: HttpClient) { }
+
+  /* MeanStack Mehod */
+  getToken() {
+    return this.token;
+  }
 
   /* MeanStack Mehod */
   createUser(email: string, password: string) {
@@ -26,9 +33,11 @@ export class AuthService {
   loginUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http
-      .post('http://localhost:3000/api/users/login', authData)
+      .post<{ token: string }>('http://localhost:3000/api/users/login', authData)
       .subscribe(response => {
         console.log(`From auth-serviceloginUser: ${response}`);
+        const token = response.token;
+        this.token = token;
       });
   }
 
