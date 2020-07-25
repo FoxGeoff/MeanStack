@@ -840,3 +840,9 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Reflecting the Token Expiration in the UI
 
 ## Task: Saving the Token in the Local Storage (here @ 6;10)
+
+## **Kanban Task #9: Adding User Authorization**
+
+- Connect Users and Posts in frontend and on the server
+
+## Task: Adding the User ID to the Posts
