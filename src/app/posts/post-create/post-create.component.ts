@@ -36,7 +36,7 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       })
     });
 
-    this.post = new Post(); //
+    this.post = new Post();
     /* built-in Observable - no need to unsubscribe */
     this.route.paramMap
       .subscribe((paramMap: ParamMap) => {

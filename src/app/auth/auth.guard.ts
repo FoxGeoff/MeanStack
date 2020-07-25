@@ -10,7 +10,8 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    if (this.authService.isAuth()) {
+    /* isAuth() is dead code used in 'fitness app */
+    if (this.authService.getIsAuthenticated) {
       return true;
     } else {
       this.router.navigate(['/login']);

@@ -838,3 +838,5 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Adding Route Guards
 
 ## Task: Reflecting the Token Expiration in the UI
+
+## Task: Saving the Token in the Local Storage (here @ 6;10)
