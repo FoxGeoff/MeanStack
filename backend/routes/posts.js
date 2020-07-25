@@ -40,8 +40,17 @@ router.post(
       title: req.body.title,
       message: req.body.message,
       imagePath: `${url}/images/${req.file.filename}`,
+      creator: req.userData.userId,
     });
-    console.log("From Server- from router.post: " + post);
+
+     /* debug: check */
+    console.log("From Server- from router.post: " + JSON.stringify(post));
+
+    /* debug: stop save to DB
+    console.log("From Server- debug: " +  JSON.stringify(req.userData) );
+    return res.status(200).json({});
+    */
+
     // generates query to DB
     post.save().then((createPost) => {
       res.status(201).json({
