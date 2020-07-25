@@ -846,3 +846,17 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 - Connect Users and Posts in frontend and on the server
 
 ## Task: Adding the User ID to the Posts
+
+- Listing the posts we now have a userId (creator):
+
+```json
+  _id: 5f1cb45e52ae42599c6eb785,
+  title: 'Test with userId',
+  message: 'Test this',
+  imagePath: 'http://localhost:3000/images/test-with-userid-1595716702384.jpg',
+  creator: 5f18d8129aec24488852356b,
+```
+
+## Task: Protecting Resources with Authorization
+
+- Now use this creator id on the backend server to deny delete and edit to non owners

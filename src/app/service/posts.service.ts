@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { title } from 'process';
 import { PostCreateComponent } from '../posts/post-create/post-create.component';
+import { Console } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class PostsService {
                 title: post.title,
                 message: post.message,
                 id: post._id,
-                imagePath: post.imagePath
+                imagePath: post.imagePath,
+                creator: post.creator
               };
             }),
             maxPosts: postData.maxPosts
@@ -41,6 +43,10 @@ export class PostsService {
         })
       )
       .subscribe((transformedPostsData) => {
+
+        /* Debug: check */
+        console.log(`getPosts, transformed Post data: ${transformedPostsData}`);
+
         this.posts = transformedPostsData.posts;
         this.postsUpdate$.next({
           posts: [...this.posts],
