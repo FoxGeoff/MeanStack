@@ -3,4 +3,5 @@ export class Post {
   title: string;
   message: string;
   imagePath: string;
+  creator: string;
  }

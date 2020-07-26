@@ -59,7 +59,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
                 id: postData.post._id,
                 title: postData.post.title,
                 message: postData.post.message,
-                imagePath: postData.post.imagePath
+                imagePath: postData.post.imagePath,
+                creator: postData.post.creator
               };
               console.log(`From server Message: ${postData.msg}`);
               this.form.setValue({

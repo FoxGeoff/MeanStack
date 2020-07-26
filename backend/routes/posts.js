@@ -93,6 +93,7 @@ router.put(
       title: req.body.title,
       message: req.body.message,
       imagePath: imagePath,
+      creator: req.userData.userId,
     });
 
     /* Debug -   */

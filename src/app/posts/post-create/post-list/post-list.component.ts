@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   /* Authentication */
   userIsAuthenticated = false;
   private authListenSubs: Subscription;
-  private userId: string;
+  public userId: string;
 
   constructor(
     private postsService: PostsService,

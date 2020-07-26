@@ -108,7 +108,8 @@ export class PostsService {
         id: postId,
         title: postTitle,
         message: postMessage,
-        imagePath: image
+        imagePath: image,
+        creator: null // handle on sever
       };
     }
     this.http
