@@ -162,7 +162,7 @@ router.delete("/:id", checkAuth, (req, res, next) => {
   /* Only allow creator of post */
   var query = { _id: req.params.id, creator: req.userData.userId };
   Post.deleteOne(query).then((result) => {
-    if (result.nModified > 0) {
+    if (result.n > 0) {
       res.status(200).json({
         msg: `From Server- Post deleted successfully! postId: ${req.params.id}`,
       });
