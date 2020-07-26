@@ -57,7 +57,8 @@ router.post("/login", (req, res, next) => {
       /* this will return automatically no need for implicit return */
       res.status(200).json({
         token: token,
-        expiresIn: 3600
+        expiresIn: 3600,
+        userId: fetchedUser._id
       });
     })
     .catch((err) => {

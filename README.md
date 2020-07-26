@@ -860,3 +860,5 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Protecting Resources with Authorization
 
 - Now use this creator id on the backend server to deny delete and edit to non owners
+
+## Task: Passing the UserId on the Frontend

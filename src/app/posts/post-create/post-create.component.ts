@@ -5,6 +5,7 @@ import { PostsService } from 'src/app/service/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { mimeType } from './mime-type.validator';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -20,7 +21,10 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
   private mode = 'create';
   private postId: string;
 
-  constructor(public postService: PostsService, public route: ActivatedRoute) { }
+  constructor(
+    public postService: PostsService,
+    public route: ActivatedRoute,
+    ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -35,7 +39,6 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
         asyncValidators: [mimeType]
       })
     });
-
     this.post = new Post();
     /* built-in Observable - no need to unsubscribe */
     this.route.paramMap
