@@ -43,7 +43,7 @@ router.post(
       creator: req.userData.userId,
     });
 
-     /* debug: check */
+    /* debug: check */
     console.log("From Server- from router.post: " + JSON.stringify(post));
 
     /* debug: stop save to DB
@@ -101,10 +101,17 @@ router.put(
     );
 
     /* Using Mongoose model: post1: Post */
-    var query = { _id: req.params.id };
-    Post.findOneAndUpdate(query, updatedPost).then((result) => {
-      console.log("From Server- router.put" + result);
-      res.status(200).json({ msg: "Post updated successfully!" });
+
+    /* Only allow creator of post */
+    var query = { _id: req.params.id, creator: req.userData.userId };
+    Post.updateOne(query, updatedPost).then((result) => {
+      if (result.nModified > 0) {
+        res.status(200).json({
+          msg: "From Server- Post updated successfully!" });
+      } else {
+        res.status(401).json({
+          msg: "From Server- Not Authorized!" });
+      }
     });
   }
 );
@@ -137,24 +144,32 @@ router.get("", (req, res, next) => {
     postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
   }
   postQuery
-  .then((result) => {
-    fetchedPost = result;
-    return Post.count();
-  })
-  .then(count => {
-    console.log("From Server- router.get(ALL)" + fetchedPost);
-    res.status(200).json({
-      msg: "Posts fetched successfully!",
-      posts: fetchedPost,
-      maxPosts: count
+    .then((result) => {
+      fetchedPost = result;
+      return Post.count();
+    })
+    .then((count) => {
+      console.log("From Server- router.get(ALL)" + fetchedPost);
+      res.status(200).json({
+        msg: "Posts fetched successfully!",
+        posts: fetchedPost,
+        maxPosts: count,
+      });
     });
-  });
 });
 
 router.delete("/:id", checkAuth, (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id }).then((result) => {
-    console.log(req.params.id);
-    res.status(200).json({ msg: "Post deleted successfully!" });
+  /* Only allow creator of post */
+  var query = { _id: req.params.id, creator: req.userData.userId };
+  Post.deleteOne(query).then((result) => {
+    if (result.nModified > 0) {
+      res.status(200).json({
+        msg: `From Server- Post deleted successfully! postId: ${req.params.id}`,
+      });
+    } else {
+      res.status(401).json({
+        msg: "From Server- Not Authorized!" });
+    }
   });
 });
 
