@@ -866,3 +866,7 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 ## Task: Using the User ID on the Frontend
 
 - Hide on list, butons edit / delete for non owner user
+
+## **Kanban Task #10: Handling Errors**
+
+## Task: Testing Different Places to Handle Errors
