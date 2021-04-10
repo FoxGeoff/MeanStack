@@ -869,4 +869,4 @@ password: "$2b$10$KY5tRnVsEaOxRjK7SP6NVejLEsooaT5PUv4Vu93fc/qORNyf00iLS"
 
 ## **Kanban Task #10: Handling Errors**
 
-## Task: Testing Different Places to Handle Errors
+## Task: Testing Different Places to Handle Errors.
